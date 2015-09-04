@@ -1,0 +1,472 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>
+		
+			Setter Functions
+		
+		- PiMunkey Documentation - MillionMunkeys.net
+	</title>
+	<link href="MillionMunkeys.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+	<!--
+	.NewWindow {
+		font-size: smaller;
+	}
+	-->
+	</style>
+
+</head>
+
+<body link="#AE854C" vlink="#908B76" alink="#002377">
+<table width="90%" align="center" cellpadding="10" cellspacing="1" class="MainLayout">
+	<tr bgcolor="#FFFFFF">
+		<td colspan="2" align="center" valign="top" bgcolor="#002377"><a href="http://www.millionmunkeys.net/"><img src="MillionMunkeysLogoMunkey.jpg" alt="MillionMunkeys.net" width="525" height="100" border="0" longdesc="MillionMunkeys Logo"></a></td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+		<td width="220" align="left" valign="top" bgcolor="#FFFFFF">
+			<table width="200" border="0" cellpadding="0" cellspacing="0" id="navigation">
+				
+		
+		
+			
+			
+		
+		
+		
+		
+
+		
+			
+			
+				
+				
+				
+				
+				
+
+			
+			
+			
+			
+				
+				
+				
+				
+					
+				
+				
+					
+					
+					
+				
+				
+				
+				
+				
+				
+			
+			
+			
+			
+				
+				
+		
+		
+				
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="index.html">What is Pi Programming?</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="whatsnew.html">What's New</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="structures.html">Arrays vs. Structs</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong>Pi Object Reference</strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="getters.html">Getter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="setters.html">Setter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="functions.html">Listener & Filter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+			</table>
+			<p>&nbsp;</p>
+		</td>
+		<td width="*" rowspan="2" valign="top" bgcolor="#FFFFFF">
+			
+				<p>
+					
+					
+						
+						<a href="">PiMunkey Documentation</a> ->
+					
+						
+						<a href="getters.html">Pi Object Reference</a> ->
+					
+				</p>
+				
+					<h2>Setter Functions</h2>
+				
+				<p>&nbsp;</p>
+<ul>
+	<li><strong><a name="add" id="add"></a>add</strong>: Appends values to the end of a PiComponent when used as an Array.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>add (</strong><em>any</em><strong> item1 [, </strong><em>any</em><strong> item2, ... </strong><em>any</em><strong> itemN])</strong> : Pass one or more items to be added to the end of the array. The items may be of any data type. To add items to the beginning or in the middle of an array, use the &quot;<a href="#insertAt">insertAt</a>&quot; function.</p>
+			</blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p><em>ColdFusion:</em> <br />
+					&lt;cfset numbers = <a href="#newMunkey">newMunkey</a>(1,3,5,7) /&gt;<br />
+					&lt;cfset numbers.<a href="#add">add</a>(2,4,6) /&gt;</p>
+				<p><em>Javascript:</em><br />
+					var numbers = new PiObject([1,3,5,7]);<br />
+					numbers.add(2,4,6);
+				</p>
+				<p><em>result:</em> 1,3,5,7,2,4,6</p>
+			</blockquote>
+			<p>NOTE: The <a href="#add">add</a>() function will not accept named attributes.</p>
+		</blockquote>
+	</li>
+	<li><strong><a name="destroy" id="add2"></a>destroy</strong>: [Javascript only] Cleans up  the Pi Object for garbage collection from Javascript memory.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>destroy(</strong><strong>)</strong> : Call the function without arguments. It will delete all of the internal variables, and all filters and listeners, and references to other objects. (This is important so that linked objects don't remain in memory.) </p>
+			</blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p><em>Javascript:</em> <br />
+					// Cleanup child objects, if any<br />
+piObject.<a href="functions.html#each">each</a>( function(object, property, value) {<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( value instanceof PiObject )<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value.<a href="#destroy">destroy</a>(); <br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+					});
+					<br />
+					piObject.<a href="#destroy">destroy</a>();<br />
+					delete PiObject;</p>
+</blockquote>
+			<p>CAUTION: If a property is a simple object, like a string, number, or date, it will be deleted, but if it is a complex object  that has been assigned by reference, that other object will continue to exist, unless you delete it as well. It has to be assumed that something else might also have a reference to that object.</p>
+		</blockquote>
+	</li>
+	<li><strong><a name="destroy" id="add3"></a>extend</strong>: [Javascript only] Creates a new object class that inherits from the PiObject class.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>extend (</strong><em>function</em><strong> constructor)</strong> : Call this function  and it will return the new class. You can optionally pass a function to use as the constructor for the new class. The extend() function is also available on all children objects, as well as a reference to the parent prototype class, as a class-level variable named 'parent'. All pi object children call an init() function after instantiation, which you can override to execute your own code. The init function receives the configuration object used when the new object is created.</p>
+			</blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p><em>Javascript:</em> <br />
+					Car = PiObject.<a href="#extend">extend</a>();<br />
+					Car.prototype.init = function(config) {<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Car.parent.init.apply(this,arguments);<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Car initialization code here<br />
+					}
+					<br />
+					SportsCar = Car.<a href="#extend">extend</a>();<br />
+					SportsCar.prototype.init = function(config) {<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SportsCar.parent.init.apply(this,arguments);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Sports Car initialization code here					<br />
+					}<br />
+					var myCar
+				= new SportsCar({<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: &quot;DeLorean&quot;,<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: &quot;silver&quot;,<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accessories: new PiObject([&quot;flux capacitor&quot;]) <br />
+				});
+				</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="insertAt" id="insertAt"></a>insertAt</strong>: 
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>insertAt (</strong><em>integer</em><strong> index, </strong><em>any</em><strong> item1 [, </strong><em>any</em> <strong> item2, ... </strong><em>any</em><strong> itemN])</strong> : The first argument is always a ColdFusion-type numeric index, i.e. starting at 1 and going up to the length of the array. The items passed will be inserted into the array <em><strong>before</strong></em> the specified index position. The index is then followed by one or more items to be added to the array at the desired position. The items may be of any data type. To add items to the end of an array, use the &quot;<a href="#add">add</a>&quot; function.</p>
+			</blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p><em>ColdFusion:</em> <br />
+					&lt;cfset numbers = <a href="#newMunkey">newMunkey</a>(1,3,5,7) /&gt;<br />
+&lt;cfset numbers.<a href="#insertAt">insertAt</a>(2,2) /&gt;<br />
+				&lt;cfset numbers.<a href="#insertAt">insertAt</a>(4,4,6) /&gt;</p>
+				<p><em>Javascript:</em><br />
+					var numbers = new PiObject([1,3,5,7]);<br />
+					numbers.<a href="#insertAt">insertAt</a>(2,2);<br />
+				numbers.<a href="#insertAt">insertAt</a>(4,4,6); </p>
+				<p><em>result:</em> 1,2,3,<em><strong>4</strong></em>,<em><strong>6</strong></em>,<em><strong>5</strong></em>,7 (Note that the numbers 6 and 5 are reversed, because 4 and 6 were both inserted before 5.)</p>
+			</blockquote>
+			<p>NOTE: The insertAt() function will not accept named attributes.</p>
+		</blockquote>
+	</li>
+	<li><strong><a name="move" id="insertAt2"></a>move</strong>: Moves a value to a new ordered location in an object.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>move (</strong><em>any</em><strong> oldIndex,</strong><em> any</em><strong> newIndex</strong><strong>)</strong> : The first argument is the current location of the property in the object. The second argument is the desired location of the property. Most often these arguments will be numbers, but if you  added the items by names, you can also use the property names instead of numbers. In addition, you can use negative indexes to count backwards from the end of the list. </p>
+			</blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p><em>ColdFusion:</em> <br />
+					&lt;cfset numbers = <a href="#newMunkey">newMunkey</a>(1,2,3,4,5) /&gt;<br />
+					&lt;cfset numbers.<a href="#move">move</a>(5,3) /&gt;</p>
+				<p><em>Javascript:</em><br />
+					var numbers = new PiObject([1,2,3,4,5]);<br />
+				numbers.<a href="#move">move</a>(5,3); </p>
+				<p><em>result:</em> 1,2,<strong>5</strong>,3,4</p>
+			</blockquote>
+			<p>CAUTION: The move() function does not fire any filters or listeners.</p>
+			<p>CAUTION: An index of 0 is a special case, depending on the language you're programming in. In Javascript, where indexes start with 0, an index of <strong>0</strong> will indicate the first item in the list, but in ColdFusion, where indexes start with 1, and index of <strong>0</strong> will count backwards form the end of the list and give you the last item in the list.</p>
+		</blockquote>
+	</li>
+	<li><strong><a name="newMunkey" id="newMunkey"></a>newMunkey</strong>: [ColdFusion only] A shortcut function for any child of the PiComponent that returns a new instance of the base PiComponent class, and not the child class.  To get a new instance of the child class use the  'new' function.  WARNING: This function should never be overridden by a child class!
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>newMunkey ( )</strong> : Call the function without arguments to get an empty PiComponent.</li>
+				<li><strong>newMunkey (propertyName1 = </strong><em>any</em><strong> </strong><strong>item1 [, propertyName2 = </strong><em>any</em><strong> </strong><strong>item2, ... propertyNameN = </strong><em>any</em><strong> </strong><strong>itemN])</strong> : If you use the named attribute syntax in ColdFusion, the returned object will be initialized with the arguments passed. Each argument name will be used as the name of the property, and the value of the argument will be used as the associated item.</li>
+				<li><strong> newMunkey (ArgumentCollection = </strong><em>Struct</em><strong> collection)</strong> : If you use the ArgumentCollection syntax in ColdFusion, the returned object will be initialized with the values of passed structure. The name of each member of the passed structure will be used as the name of the property, and the value of each member of the structure will be used as the associated item. </li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p>Each of the following examples will produce the same object structure:</p>
+				<p>&lt;cfset object = <a href="#newMunkey">newMunkey</a>() /&gt;<br />
+					&lt;cfset object.<a href="#set">set</a>(id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot;) /&gt;</p>
+				<p>&lt;cfset object = <a href="#newMunkey">newMunkey</a>(id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot;) /&gt;</p>
+				<p>&lt;cfset args[&quot;id&quot;] = &quot;page1&quot; /&gt;<br />
+					&lt;cfset args[&quot;title&quot;] = &quot;Page One&quot; /&gt;<br />
+					&lt;cfset args[&quot;template&quot;] = &quot;first.cfm&quot; /&gt;<br />
+					&lt;cfset object = <a href="#newMunkey">newMunkey</a>(ArgumentCollection=args) /&gt;</p>
+				<p><em>Caller Page Code</em>: &lt;my:customTag id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot; /&gt;<br />
+					<em>Custom Tag Code</em>: &lt;cfset object = <a href="#newMunkey">newMunkey</a>(ArgumentCollection=Attributes) /&gt; </p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="remove" id="remove"></a>remove</strong>: Removes the specified property from the object.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>remove (</strong><em>integer</em><strong> index)</strong> : Removes the item at the specified position in the object.</li>
+				<li><strong>remove(</strong><em>string</em><strong> propertyName)</strong> : Removes the item with the associated name.</li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p><em>ColdFusion:<br />
+				</em>&lt;cfset numbers = <a href="#newMunkey">newMunkey</a>(1,3,5,7) /&gt;<br />
+				&lt;cfset numbers.<a href="#remove">remove</a>(4) /&gt;<br />
+				&lt;cfset numbers.<a href="#remove">remove</a>(2) /&gt;</p>
+				<p><em>Javascript:</em><br />
+					var numbers = new PiObject([1,3,5,7]);<br />
+					numbers.<a href="#remove">remove</a>(4);<br />
+				numbers.<a href="#remove">remove</a>(2); </p>
+				<p><em>result: </em>1,5</p>
+				<p><em>ColdFusion:</em><br />
+					&lt;cfset page = <a href="#newMunkey">newMunkey</a>(id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot;, group=&quot;Lesson 1&quot;) /&gt;<br />
+					&lt;cfset page.<a href="#remove">remove</a>(&quot;group&quot;) /&gt;<br />
+				&lt;cfset properties = page.<a href="getters.html#getPropertyList">getPropertyList</a>() /&gt;</p>
+				<p><em>Javascript:</em><br />
+					var page = new PiObject({<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: &quot;page1&quot;,<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: &quot;Page One&quot;,<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template: &quot;first.html&quot;,<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group: &quot;Lesson 1&quot;<br />
+					});<br />
+					page.remove(&quot;group&quot;);<br />
+				var properties = page.<a href="getters.html#getPropertyList">getPropertyList</a>(); </p>
+				<p><em>result:</em> The &quot;properties&quot; variable contains &quot;id,title,template&quot; because &quot;group&quot; is now gone.</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="removeAll" id="remove2"></a>removeAll</strong>: Removes all properties from the object.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>removeAll(</strong><strong>)</strong> : Deletes all properties from the object.</li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p><em>ColdFusion:<br />
+					</em>&lt;cfset collection.<a href="#remove">removeAll</a>() /&gt;</p>
+				<p><em>Javascript:</em><br />
+					// Cleanup child objects, if any<br />
+					piObject.<a href="functions.html#each">each</a>( function(object, property, value) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( value instanceof PiObject )<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value.<a href="#destroy">destroy</a>(); <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}); <br />
+piObject.<a href="#removeAll">removeAll</a>(); </p>
+				<p><em>result: empty</em></p>
+			</blockquote>
+			<p>NOTE: This function does not affect  listeners or filters.</p>
+			<p>CAUTION: For Javascript garbage collection, if a property is a simple object, like a string, number, or date, it will be deleted, but if it is a complex object  that has been assigned by reference, that other object will continue to exist, unless you delete it as well. It has to be assumed that something else might also have a reference to that object.</p>
+			<p>CAUTION: When using removeAll(), you cannot use a listener to restore any values.</p>
+		</blockquote>
+	</li>
+	<li><strong><a name="set" id="set"></a>set</strong>: A function for direct assignment of properties, singly or in bulk.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>set (</strong><em>string</em><strong> propertyName, </strong><em>any</em><strong> item)</strong> : If you use unnamed arguments, the first argument is the unique name of the property within the object, and the second argument is what to store there. The second argument can be of any data type you want.</li>
+				<li><strong>set (propertyName1 =</strong><em> any</em><strong> </strong><strong>item1 [, propertyName2 = </strong><em>any</em><strong> </strong><strong>item2, ... propertyNameN = </strong><em>any</em><strong> </strong><strong>itemN])</strong> : [ColdFusion only] If you use the named attribute syntax in ColdFusion, each argument name will be used as the name of the property, and the value of the argument will be used as the associated item.</li>
+				<li><strong>set (ArgumentCollection = </strong><em>Struct</em><strong> collection)</strong> : [ColdFusion only] If you use the ArgumentCollection syntax in ColdFusion, the name of each member of the passed structure will be used as the name of the property, and the value of each member of the structure will be used as the associated item. </li>
+				<li><strong>set (</strong><em>array</em> <strong>values)</strong> : [Javascript only] If you use an array to set the values, it will create unnamed properties in the object using an array-style syntax.</li>
+				<li><strong>set (</strong><em>object</em> <strong>config)</strong> : [Javascript only] If you use an object to set the values, the properties of the object are used as the property names, storing their corresponding values. It essentially creates a pi object version of a regular object.</li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p>Each of the following examples will produce the same object structure:</p>
+				<p><em>ColdFusion:</em><br />
+					&lt;cfset object.<a href="#set">set</a>(&quot;id&quot;, &quot;page1&quot;) /&gt;<br />
+					&lt;cfset object.<a href="#set">set</a>(&quot;title&quot;, &quot;Page One&quot;) /&gt;<br />
+					&lt;cfset object.<a href="#set">set</a>(&quot;template&quot;, &quot;first.cfm&quot;) /&gt;</p>
+				<p>&lt;cfset object.<a href="#set">set</a>(id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot;) /&gt;</p>
+				<p>&lt;cfset args[&quot;id&quot;] = &quot;page1&quot; /&gt;<br />
+					&lt;cfset args[&quot;title&quot;] = &quot;Page One&quot; /&gt;<br />
+					&lt;cfset args[&quot;template&quot;] = &quot;first.cfm&quot; /&gt;<br />
+					&lt;cfset object.<a href="#set">set</a>(ArgumentCollection=args) /&gt; </p>
+				<p><em>Caller Page Code</em>: &lt;my:customTag id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot; /&gt;<br />
+					<em>Custom Tag Code</em>: &lt;cfset object.<a href="#set">set</a>(ArgumentCollection=Attributes) /&gt; </p>
+				<p><em>Javascript:</em><br />
+				var object = new PiObject();</p>
+				<p>object.<a href="#set">set</a>(&quot;id&quot;, &quot;page1&quot;);<br />
+				object.<a href="#set">set</a>(&quot;title&quot;, &quot;Page One&quot;);<br />
+				object.<a href="#set">set</a>(&quot;template&quot;, &quot;first.html&quot;);</p>
+				<p>object.<a href="#set">set</a>({<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: &quot;page1&quot;,<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: &quot;Page One&quot;,<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template: &quot;first.html&quot;<br />
+				});</p>
+				<p>var args = {<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: &quot;page1&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: &quot;Page One&quot;,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template: &quot;first.html&quot;<br />
+};<br />
+object.<a href="#set">set</a>(args); </p>
+</blockquote></blockquote></li></ul>
+				<p>&nbsp;</p>
+			
+		</td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+	  <td width="220" valign="top" bgcolor="#DDDDDD"><p style="text-align:center"><a href="http://www.twitter.com/millionmunkeys"><img src="http://twitter-badges.s3.amazonaws.com/follow_us-b.png" alt="Follow millionmunkeys on Twitter"/></a>
+	      <p></td>
+  </tr>
+	<tr>
+		<td colspan="2" align="center" valign="top" bgcolor="#DDDDDD"><p>Copyright &copy;2010, MillionMunkeys&reg; LLC, All Rights Reserved</p></td>
+	</tr>
+</table>
+</body>
+</html>
+	

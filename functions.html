@@ -1,0 +1,753 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>
+		
+			Listener & Filter Functions
+		
+		- PiMunkey Documentation - MillionMunkeys.net
+	</title>
+	<link href="MillionMunkeys.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+	<!--
+	.NewWindow {
+		font-size: smaller;
+	}
+	-->
+	</style>
+
+</head>
+
+<body link="#AE854C" vlink="#908B76" alink="#002377">
+<table width="90%" align="center" cellpadding="10" cellspacing="1" class="MainLayout">
+	<tr bgcolor="#FFFFFF">
+		<td colspan="2" align="center" valign="top" bgcolor="#002377"><a href="http://www.millionmunkeys.net/"><img src="MillionMunkeysLogoMunkey.jpg" alt="MillionMunkeys.net" width="525" height="100" border="0" longdesc="MillionMunkeys Logo"></a></td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+		<td width="220" align="left" valign="top" bgcolor="#FFFFFF">
+			<table width="200" border="0" cellpadding="0" cellspacing="0" id="navigation">
+				
+		
+		
+			
+			
+		
+		
+		
+		
+
+		
+			
+			
+				
+				
+				
+				
+				
+
+			
+			
+			
+			
+				
+				
+				
+				
+					
+				
+				
+					
+					
+					
+				
+				
+				
+				
+				
+				
+			
+			
+			
+			
+				
+				
+		
+		
+				
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="index.html">What is Pi Programming?</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="whatsnew.html">What's New</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="structures.html">Arrays vs. Structs</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong>Pi Object Reference</strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="getters.html">Getter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="setters.html">Setter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="functions.html">Listener & Filter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+			</table>
+			<p>&nbsp;</p>
+		</td>
+		<td width="*" rowspan="2" valign="top" bgcolor="#FFFFFF">
+			
+				<p>
+					
+					
+						
+						<a href="index.html">PiMunkey Documentation</a> ->
+					
+						
+						<a href="getters.html">Pi Object Reference</a> ->
+					
+				</p>
+				
+					<h2>Listener & Filter Functions</h2>
+				
+				<blockquote>
+	<h4><a name="listeners" id="listeners"></a>Listeners</h4>
+	<p>Listeners are fired whenever the <a href="setters.html#set">set</a>() function is called. They can be either &quot;global listeners&quot; or &quot;property listeners&quot;. Global Listeners are fired whenever anything changes on a Pi Object. They are most commonly used with Pi Objects acting as Arrays, but can also be used with Pi Objects acting as structs. Property Listeners, in contrast, are only fired when one particular property changes on the object. The possibilities are almost limitless on how to use a listener. You can use them to update other values when a key value changes, or to override or rollback a change when certain conditions occur. When using &quot;global listeners&quot; on a Pi Array, you can ensure that certain actions happen, regardless of where in your code an item is added to the Array. Some other coder on your team could create an entirely new page that adds objects to your Pi Object, and you don't have to worry about them remembering to also include your special processing code. It will automatically execute.</p>
+	<p>For more details and examples, see the sections below on &quot;<a href="#addListener">addListener</a>&quot; and &quot;<a href="#removeListener">removeListener</a>&quot;.</p>
+	<h4><a name="filters" id="filters"></a>Filters</h4>
+	<p>Filters are fired whenever the <a href="getters.html#get">get</a>() function is called. As with listeners, they can be either &quot;global filters&quot; or &quot;property filters&quot;. Global Filters intercept any request made on a Pi Object. Property filters  intercept requests for only one particular property on a Pi Object. You can use filters mask or hide information, or to add additional information based upon the requestor. You can also use them to create &quot;virtual properties,&quot; i.e. add a filter for a property that doesn't actually exists. If someone requests that property, your filter method can instead calculate an answer and return it to the requestor. And as with listeners, you setup your filters on your objects and then it doesn't matter who uses your objects. Someone else on your team could create new code that requests a property or an object, and they won't have to remember to do any special processing or conditional code. They just request the property and use the result.</p>
+	<p>For more details and examples, see the sections below on &quot;<a href="#addFilter">addFilter</a>&quot; and &quot;<a href="#removeFilter">removeFilter</a>&quot;.</p>
+	<h4>Unanticipated Extendability</h4>
+	<p>The extra benefit of listeners and filters is the unanticipated tangle. Perhaps you're two weeks from delivery and the client says that they forgot that they need an audit trail. Anytime anything changes on a request, they want to log it to a file. There's no telling how many places in your code might edit the object. With Pi Objects, though, it's no problem. Just add a global listener to your collection, which listens to anything the object has added to it, and write to the log file whenever any property on any item is modified.</p>
+	<p>This is the tragic flaw of &quot;event-driven&quot; methodology. If the event doesn't exist yet, you have to go through every place in your code where the object is edited and fire this new &quot;edit&quot; event. With Property-Invocation, everything is a potential plugin point, with no additional work and little or no additional overhead in execution time.</p>
+</blockquote>
+<h3>Methods</h3>
+<ul>
+	<li><strong><a name="addFilter" id="addFilter"></a>addFilter</strong>: Adds a filter function to either the entire object as a whole, or a specific property within the object. NOTE: You may add a filter for a property even if the property doesn't exist yet.  It will still be fired whenever that property is requested from the Pi Object, and regardless of whether the property actually exists or not.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<em>ColdFusion or Javascript:</em>
+				<ol>
+					<li><strong>addFilter (</strong><em>string</em><strong> property, </strong><em>object</em><strong> object, </strong><em>string</em><strong> method</strong><strong>_name)</strong> : Use three arguments to add a &quot;property filter&quot; that fires whenever the specified property is requested from the Pi Object.
+						<ul>
+							<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Object. NOTE: You may add a filter to a property even if the property doesn't exist yet.  It will still be fired whenever that property is requested from the Pi Object, and regardless of whether the property actually exists or not.</li>
+							<li><em>object </em><strong>object</strong> : The second argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do.</li>
+							<li><em>string </em><strong>method</strong><strong>_name</strong>: The third argument must be the name of a method within the object specified in the second argument.</li>
+						</ul>
+					</li>
+					<li><strong>addFilter (</strong><em>object</em><strong> object, </strong><em>string</em><strong>method_name</strong><strong>)</strong> : Use two arguments to add a &quot;global filter&quot; that fires whenever any item is requested from the Pi Object. This format is particularly useful when using Pi Objects as arrays. 
+						<ul>
+							<li><em>object </em><strong>object</strong> : The first argument must be a valid  object. It can be a Pi Object, but it does not need to be; Any  object will do.</li>
+							<li><em>string </em><strong>method</strong><strong>_name</strong>: The second argument must be the name of a method within the object specified in the first argument.</li>
+						</ul>
+					</li>
+				</ol>
+			</blockquote>
+			<blockquote>
+				<em>Javascript only:</em>
+				<ol>
+					<li><strong>addFilter (</strong><em>string</em><strong> property, </strong>[<em>object</em><strong> scope,] </strong><em>function</em><strong> method)</strong> : Use this function with a property name as the first argument to add a &quot;property filter&quot; that fires whenever the specified property is requested from the Pi Object.
+						<ul>
+							<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Object. NOTE: You may add a filter to a property even if the property doesn't exist yet.  It will still be fired whenever that property is requested from the Pi Object, and regardless of whether the property actually exists or not.</li>
+							<li><em>object </em><strong>scope</strong> : [optional] The second optional argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do. If a scope is not provided, the<strong> </strong>object to which the filter is being attached is used as the scope.</li>
+							<li><em>function </em><strong>method</strong> : The third argument must be a reference to a function. This function can be a stand-alone function, or a method on an object. This function does not have to belong to the object specified in the second argument, but it can.</li>
+						</ul>
+					</li>
+					<li><strong>addFilter (</strong>[<em>object</em><strong> scope,] </strong><em>function</em><strong> method)</strong> : Use this function without the property name to add a &quot;global filter&quot; that fires whenever any item is requested from the Pi Object. This format is particularly useful when using Pi Objects as arrays.
+						<ul>
+							<li><em>object </em><strong>scope</strong> : [optional] The first optional argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do. If a scope is not provided, the<strong> </strong>object to which the filter is being attached is used as the scope.</li>
+							<li><em>function </em><strong>method</strong> : The second argument must be a reference to a function. This function can be a stand-alone function, or a method on an object. This function does not have to belong to the object specified in the first argument, but it can.</li>
+						</ul>
+					</li>
+				</ol>
+			</blockquote>
+<p>Filter Method Arguments:</p>
+			<ol>
+				<li><strong>object</strong>: A reference to the Pi Object.</li>
+				<li><strong>property</strong>: The name of the property being requested. NOTE: This argument is always passed to the filter, regardless of whether the filter is a &quot;global filter&quot; or a &quot;property filter&quot;.</li>
+				<li><strong>value</strong>: The value of the property being returned. If the property does not  exist, this value will be the empty string.</li>
+			</ol>
+			<p>Filter Method Result:</p>
+			<p>If you do not return a value from your filter method, then the &quot;value&quot; argument passed to your method will be passed back to the original caller unmodified. If you do return a value from your filter method, however, you will override the value being passed into your filter method. This will not change the value of the item in the Pi Object, but it will change the value returned to the original caller. </p>
+			<p>CAUTION: If you edit the value of the property in the Pi Object, but do not return the new value from the filter function, then the original caller will still receive the original value.</p>
+			<p>Examples:</p>
+			<p>In this first example we're going to add a global filter to an array of requests in a workflow. Anytime a request is retrieved we want to assign that request to the user so that other people don't try to claim it.</p>
+			<blockquote>
+				<p><em>ColdFusion:<br />
+					</em>// 
+					Array Filter Setup Code<br />
+					&lt;cfset requestManager.<a href="#addFilter">addFilter</a>(AccessController, &quot;setOwnerId&quot;) /&gt;<br />
+					// Global Filter Method:<br />
+					&lt;cfcomponent hint=&quot;Manages Access and Permissions to Objects&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;setOwnerId&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;value&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset var request = Arguments.value /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset request.<a href="setters.html#set">set</a>(&quot;ownerId&quot;, GetAuthUser()) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+				<p><em>Javascript:</em><br />
+					// Global Filter Method<br />
+					AccessController = new PiObject();<br />
+					AccessController.setOwnerID = function(object, property, value) {<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; value.set( &quot;ownerId&quot;, user.get(&quot;id&quot;) );<br />
+					}
+<br />
+					// Array Filter Setup Code<br />
+					requestManager.addFilter( AccessController.setOwnerId ); // single argument sets the scope of the function call to requestManager.<br />
+					requestManager.addFilter( AccessController, AccessController.setOwnerId ); // 
+				two arguments set the scope of the function call to AccessController.</p>
+			</blockquote>
+			<p>In this second example we're going to add a filter to non-existant &quot;user_status&quot; property. Whenever someone requests this property, we're going to instead show them the user's first name, last name, and the number of requests that they are currently processing.</p>
+			<blockquote>
+				<p><em>ColdFusion:<br />
+					</em><br />
+					&lt;cfcomponent hint=&quot;User Object&quot; extends=&quot;MillionMunkeys.PiMunkey_1_5.PiComponent&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; // 
+					Property Filter Setup Code<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset this.<a href="#addFilter">addFilter</a>(&quot;user_status&quot;, this, &quot;getCurrentStatus&quot;) /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; // 
+					Property Filter Method<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;getCurrentStatus&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;value&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfreturn &quot;#this.<a href="getters.html#get">get</a>('first_name')# #this.<a href="getters.html#get">get</a>('last_name')# (#this.<a href="getters.html#get">get</a>('myRequests').<a href="getters.html#getLength">getLength</a>()#)&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt;</p>
+				<p><em>Javascript:</em><br />
+					// The following example assigns one of its own functions as a filter on itself.<br />
+				User = PiObject.<a href="setters.html#extend">extend</a>();<br />
+				User.prototype.init = function(config) {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; User.parent.init.apply(this,arguments);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; this.<a href="#addFilter">addFilter</a>(&quot;user_status&quot;, User.prototype.getCurrentStatus);<br />
+				} <br />
+				User.prototype.getCurrentStatus = function(object, property, value) {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; return  this.<a href="getters.html#get">get</a>('first_name') + &quot; &quot; + this.<a href="getters.html#get">get</a>('last_name') + &quot; (&quot; + this.<a href="getters.html#get">get</a>('myRequests').<a href="getters.html#getLength">getLength</a>() + &quot;)&quot;;<br />
+				}
+				</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="addListener" id="addListener"></a>addListener</strong>: Adds a listener function to either the entire object as a whole, or a specific property within the object.  NOTE: You may add a listener to a property even if the property doesn't exist yet.  It will be fired when the property is added to the object.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<em>ColdFusion or Javascript:</em>
+				<ol>
+					<li><strong>addListener (</strong><em>string</em><strong> property, </strong><em>object</em><strong> object, </strong><em>string</em><strong> method_name [, </strong><em>boolean</em><strong> applyToExisting])</strong> : Use three arguments (with an optional boolean fourth argument) to add a &quot;property listener&quot; that fires whenever the specified property is modified on the Pi Object.
+						<ul>
+							<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Object. NOTE: You may add a listener to a property even if the property doesn't exist yet.  It will be fired when the property is added to the object.</li>
+							<li><em>object </em><strong>object</strong> : The second argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do.</li>
+							<li><em>string </em><strong>method_name</strong>: The third argument must be the name of a method within the object specified in the second argument.</li>
+							<li><em>boolean </em><strong>applyToExisting</strong> : [default = true] The optional fourth argument determines whether the method should be immediately fired after being added. If the Pi Object already contains the specified property, the listener function will be run.</li>
+						</ul>
+					</li>
+					<li><strong>addListener (</strong><em>object</em><strong> object, </strong><em>string</em><strong> method_name [, </strong><em>boolean</em><strong> applyToExisting])</strong> : Use two arguments (with an optional boolean third argument) to add a &quot;global listener&quot; that fires whenever any property is modified on the Pi Object. This format is particularly useful when using Pi Objects as arrays. </li>
+					<ul>
+						<li><em>object </em><strong>object</strong> : The first argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do.</li>
+						<li><em>string </em><strong>method_name</strong>: The second argument must be the name of a method within the object specified in the first argument.</li>
+						<li><em>boolean </em><strong>applyToExisting</strong> : [default = true] The optional third argument determines whether the method should be immediately fired after being added. If the Pi Object is not empty, the listener function will be fired once for each item in the object.</li>
+					</ul>
+				</ol>
+			</blockquote>
+			<blockquote>
+				<em>Javascript only:</em>
+				<ol>
+					<li><strong>addListener (</strong><em>string</em><strong> property, </strong>[<em>object</em><strong> scope,] </strong><em>function</em><strong> method [, </strong><em>boolean</em><strong> applyToExisting]</strong><strong>)</strong> : Use this function with a property name as the first argument to add a &quot;property listener&quot; that fires whenever the specified property is modified on the Pi Object.
+<ul>
+							<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Object. NOTE: You may add a listener to a property even if the property doesn't exist yet.  It will be fired when the property is added to the object.</li>
+							<li><em>object </em><strong>scope</strong> : [optional] The second optional argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do. If a scope is not provided, the<strong> </strong>object to which the filter is being attached is used as the default scope.</li>
+							<li><em>function </em><strong>method</strong> : The second or third argument must be a reference to a function. This function can be a stand-alone function, or a method on an object. This function does not have to belong to the object specified as the scope, but it can.</li>
+							<li><em>boolean </em><strong>applyToExisting</strong> : [default = true] The optional final argument determines whether the method should be immediately fired after being added. If the Pi Object already contains the specified property, the listener function will be run, otherwise it.</li>
+						</ul>
+					</li>
+					<li><strong>addListener (</strong>[<em>object</em><strong> scope,] </strong><em>function</em><strong> method [, </strong><em>boolean</em><strong> applyToExisting]</strong><strong>)</strong> : Use this function without the property name to add a &quot;global listener&quot; that fires whenever any property is modified on the Pi Object. This format is particularly useful when using Pi Objects as arrays.
+						<ul>
+							<li><em>object </em><strong>scope</strong> : [optional] The first optional argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do. If a scope is not provided, the<strong> </strong>object to which the filter is being attached is used as the scope.</li>
+							<li><em>function </em><strong>method</strong> : The first or second argument must be a reference to a function. This function can be a stand-alone function, or a method on an object. This function does not have to belong to the object specified in the first argument, but it can.</li>
+							<li><em>boolean </em><strong>applyToExisting</strong> : [default = true] The optional final argument determines whether the method should be immediately fired after being added. If the Pi Object is not empty, the listener function will be fired once for each item in the object.</li>
+						</ul>
+					</li>
+				</ol>
+			</blockquote>
+		</blockquote>
+		<blockquote>
+			<p>Listener Method Arguments:</p>
+			<ol>
+				<li><strong>object</strong>: A reference to the object being modified.</li>
+				<li><strong>property</strong>: The name of the property being modified. NOTE: This argument is always passed to the listener, regardless of whether the listener is a &quot;global listener&quot; or a &quot;property listener&quot;.</li>
+				<li><strong>oldValue</strong>: The value of the property before it was modified. If the property did not previously exist, this value will be the empty string.</li>
+				<li><strong>newValue</strong>: The value of the property after it was modified. If the property was removed, the value will be the empty string.</li>
+			</ol>
+			<p>Listener Method Result:</p>
+			<p>If you do not return a value from within your listener method, then the &quot;newValue&quot; argument passed to your method will be stored in the Pi Object. If you do return a value from within your listener method, however, you will override the value being saved.</p>
+			<p>NOTE: The value of the property has already been set by the time it reaches your listener method. If you directly edit the value of the property in the Pi Object, but do not return a value from your method, there's no need to worry. Your edit will NOT be overwritten after exiting your method.</p>
+			<p>Examples:</p>
+			<p>In this first example we're going to add a global listener to an array of pages. Anytime a new page is added, we want to dynamically generate a unique URL for the page based on its page ID. We're also going to run this method against any pages already in the array.</p>
+			<blockquote>
+				<p><em>ColdFusion:<br />
+					</em>// Global Listener Method:<br />
+					&lt;cfcomponent extends=&quot;MillionMunkeys.PiMunkey_1_5.PiObject&quot; hint=&quot;TrafficMunkey&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; // Array Listener Setup Code: <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset pages = newMunkey() /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset pages.<a href="#addListener">addListener</a>(this, &quot;addURLVariable&quot;, true) /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;addURLVariable&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;oldValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;newValue&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset var newPage = Arguments.newValue /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfif not newPage.<a href="getters.html#exists">exists</a>(&quot;url&quot;) and newPage.<a href="getters.html#exists">exists</a>(&quot;pageId&quot;)&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset newPage.<a href="setters.html#set">set</a>(&quot;url&quot;, &quot;#this.<a href="getters.html#get">get</a>('baseURL')#?#this.<a href="getters.html#get">get</a>('urlVariable')#=#newPage.<a href="getters.html#get">get</a>('pageId')#&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;/cfif&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+				<p><em>Javascript:</em><br />
+					// As part of the TrafficMunkey definition.<br />
+					TrafficMunkey = PiObject.<a href="setters.html#extend">extend</a>();<br />
+					TrafficMunkey.prototype.init = function(config) {<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; TraficMunkey.parent.init.apply(this,arguments);<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; this.<a href="setters.html#set">set</a>('pages', new PiObject()).<a href="#addListener">addListener</a>(this, this.addURLVariable);<br />
+					}
+<br />
+				TrafficMunkey.prototype.addURLVariable = function(pages, property, oldPage, newPage) {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; if (!newPage.<a href="getters.html#exists">exists</a>(&quot;url&quot;) &amp;&amp; newPage.<a href="getters.html#exists">exists</a>(&quot;pageId&quot;))<br />
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; newPage.<a href="setters.html#set">set</a>(&quot;url&quot;, this.<a href="getters.html#get">get</a>('baseURL') + &quot;?&quot; + this.<a href="getters.html#get">get</a>('urlVariable') + &quot;=&quot; + newPage.<a href="getters.html#get">get</a>('pageId');<br />
+}</p>
+			</blockquote>
+			<p>In this second example we're going to add a listener to a single page object. If its page ID is ever changed, we want to update its URL  with a new unique URL, based on the new page ID. We also want remove its old ID from the page lookup list, and register it under its new ID. However, if the ID was deleted, then we don't want to register this page anymore, just remove it from the page lookup entirely.</p>
+			<blockquote>
+				<p><em>ColdFusion:<br />
+					</em>// Property Listener Setup Code<br />
+					&lt;cfset page.<a href="#addListener">addListener</a>(&quot;pageId&quot;, TrafficMunkey, &quot;addURLVariable&quot;, true) /&gt;<br />
+					...<br />
+					&lt;cfcomponent extends=&quot;MillionMunkeys.PiMunkey_1_5.PiObject&quot; hint=&quot;TrafficMunkey&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; // Property Listener Method<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;addURLVariable&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;oldValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;newValue&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset var pageLookup = this.<a href="getters.html#get">get</a>(&quot;pageLookup&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset pageLookup.<a href="setters.html#remove">remove</a>(Arguments.oldValue) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfif Arguments.newValue neq &quot;&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset Arguments.object.<a href="setters.html#set">set</a>(&quot;url&quot;, &quot;#this.<a href="getters.html#get">get</a>('baseURL')#?#this.<a href="getters.html#get">get</a>('urlVariable')#=#Arguments.newValue#&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset pageLookup.<a href="setters.html#set">set</a>(Arguments.newValue, Arguments.object) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfelse&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset Arguments.object.<a href="setters.html#remove">remove</a>(&quot;url&quot;) /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;/cfif&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+				<p><em>Javascript:</em><br />
+				// Property Listener Setup Code<br />
+page.<a href="#addListener">addListener</a>(&quot;pageId&quot;, TrafficMunkey, TrafficMunkey.addURLVariable, true);<br />
+...<br />
+TrafficMunkey = PiObject.extend();<br />
+TrafficMunkey.prototype.addURLVariable = function(page,property,oldID,newID) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var pageLookup = this.<a href="getters.html#get">get</a>(&quot;pageLookup&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pageLookup.<a href="setters.html#remove">remove</a>(oldID) /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (newID != &quot;&quot;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pageLookup.<a href="setters.html#set">set</a>(newID, object.<a href="setters.html#set">set</a>( { &quot;url&quot; : this.<a href="getters.html#get">get</a>('baseURL') + &quot;?&quot; + this.<a href="getters.html#get">get</a>('urlVariable') + &quot;=&quot; + newID } ) );<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.<a href="setters.html#remove">remove</a>(&quot;url&quot;);<br />
+}</p>
+			</blockquote>
+			<p>In this third example we're going to add a global listener to a single page object. If anything changes, we want to mark it so we can save it to the database later.</p>
+			<blockquote>
+				<p><em>ColdFusion:<br />
+					</em>// 
+					Global Listener Setup Code<br />
+					&lt;cfset page.<a href="#addListener">addListener</a>(DataAccessLayer, &quot;isDirty&quot;, false) /&gt;<br />
+					// 
+					Global Listener Method<br />
+					&lt;cfcomponent hint=&quot;Data Access Layer&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;isDirty&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;oldValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;newValue&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset Arguments.object.<a href="setters.html#set">set</a>(&quot;isDirty&quot;, true) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+				<p><em>Javascript:<br />
+				</em>// 
+					Global Listener Setup Code<br />
+					page.<a href="#addListener">addListener</a>(function (object,property,oldValue,newValue) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp; object.<a href="setters.html#set">set</a>(&quot;isDirty&quot;, true);<br />
+}, false);</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="each" id="removeFilter2"></a>each:</strong> Iterates over all of the items in a Pi Object, or until the function returns a value. The &quot;each&quot; function works much like a filter, but is run on demand, instead of in response to a &quot;get&quot; operation.  It works really well when processing all of the elements in a PiObject, or when searching for an item in a collection, replacing the need for using for-loops or iterators.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote> <em>ColdFusion or Javascript:</em>
+				<ul>
+					<li><strong>each (</strong><em>object</em><strong> object, </strong><em>string</em><strong> method_name</strong><strong>)</strong>
+						<ul>
+							<li><em>object </em><strong>object</strong> : The first argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do.</li>
+							<li><em>string </em><strong>method_name</strong>: The second argument must be the name of a method within the object specified in the first argument.</li>
+						</ul>
+					</li>
+				</ul>
+			 <em>Javascript only:</em>
+				<ul>
+					<li><strong>each (</strong>[<em>object</em><strong> scope,] </strong><em>function</em><strong> method)</strong>
+						<ul>
+							<li><em>object </em><strong>scope</strong> : [optional] The first optional argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do. If a scope is not provided, the<strong> </strong>object to which the filter is being attached is used as the scope.</li>
+							<li><em>function </em><strong>method</strong> : The second argument must be a reference to a function. This function can be a stand-alone function, or a method on an object. This function does not have to belong to the object specified in the first argument, but it can.</li>
+						</ul>
+					</li>
+				</ul>
+			</blockquote>
+			<p>Iteration Method Arguments:</p>
+			<ol>
+				<li><strong>object</strong>: A reference to the Pi Object.</li>
+				<li><strong>property</strong>: The unique identifier (property name) for each item in the object.</li>
+				<li><strong>value</strong>: The item stored in the object.</li>
+			</ol>
+			<p>Iteration Method Result:</p>
+			<ul>
+				<li><strong>No result: </strong>Use the &quot;each&quot; function without returning a value to loop over all of the items in the Pi Object. For example, you can use the &quot;each&quot; function for collecting information, or making modifications to all of the items in a Pi Object.</li>
+				<li><strong>With result:</strong> You can also use the &quot;each&quot; function to search a Pi Object. When you find the item that you're looking for, return a value and the looping will exit.</li>
+			</ul>
+			<p>Examples:</p>
+	<p>In this first example we're going to iterate over a Pi Object and collect information from each item. The way this  data is collected is implemented differently when working with ColdFusion and Javascript. In ColdFusion, the &quot;this&quot; keyword is tied to the first argument, so you must collect your information through that object. Javascript gives the concept of a &quot;<a href="https://www.google.com/search?q=javascript+closures" target="_blank">closure</a>&quot; that can be used to collect information.</p>
+			<blockquote>
+				<p><em>ColdFusion:<br />
+					</em>&lt;cfcomponent extends=&quot;MillionMunkeys.PiMunkey_1_5.PiComponent&quot; hint=&quot;pages&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset pageTitles=&quot;&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset this.<a href="#addFilter">addFilter</a>(&quot;titles&quot;, this, &quot;getPageTitles&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;getPageTitles&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset pageTitles = &quot;&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset this.<a href="#each">each</a>(this, &quot;getTitles&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfreturn pageTitles /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;getTitles&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;value&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset pageTitles = ListAppend(pageTitles, Arguments.value.<a href="getters.html#get">get</a>(&quot;title&quot;)) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt; <br />
+					&lt;/cfcomponent&gt;				</p>
+				<p><em>Javascript:</em><br />
+					// Define closure variable<br />
+				var pageTitles = [];<br />
+				// Iterator function
+				<br />
+				pages.<a href="#each">each</a>( function(pages, index, page) {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; pageTitles.push( page.<a href="getters.html#get">get</a>(&quot;title&quot;) );<br />
+				}<br />
+				pageTitles = pageTitles.join(&quot;,&quot;);
+				</p>
+			</blockquote>
+			<p>In this second example we're going to search a Pi Object for a particular item.</p>
+			<blockquote>
+				<p><em>ColdFusion:</em><br />
+				&lt;cfcomponent extends=&quot;MillionMunkeys.PiMunkey_1_5.PiComponent&quot; hint=&quot;users&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;cffunction name=&quot;findUser&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;last_name&quot; /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;cfset this.<a href="setters.html#set">set</a>(&quot;search_string&quot;, Arguments.last_name) /&gt; <br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfreturn this.<a href="#each">each</a>(this, &quot;findByLastName&quot;) /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;findByLastName&quot;&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+&nbsp;&nbsp;&nbsp;&lt;cfargument name=&quot;value&quot; /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;cfif Arguments.value.<a href="getters.html#get">get</a>(&quot;last_name&quot;) eq this.<a href="getters.html#get">get</a>(&quot;search_string&quot;)&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&lt;cfreturn Arguments.value /&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;/cfif&gt; <br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt; <br />
+&lt;/cfcomponent&gt; </p>
+				<p><em>Javascript:</em><br />
+					modules = new PiObject();<br />
+					// Find position based on y position<br />
+				modules.findPosition = function(modules, originalIndex, oldModule, newModule) {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; var newIndex = modules.<a href="#each">each</a>( function(modules, index, module) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; if (module.<a href="getters.html#get">get</a>(&quot;y&quot;) &gt; newModule.<a href="getters.html#get">get</a>(&quot;y&quot;)) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; return index;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp;&nbsp; // Match index to module's position on the y-axis.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; modules.<a href="setters.html#move">move</a>( originalIndex, newIndex );<br />
+				}<br />
+				modules.<a href="#addListener">addListener</a>(modules.findPosition); </p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="removeFilter" id="removeFilter"></a>removeFilter</strong>: Removes a filter function from  the Pi Object.
+		(NOTE:	If	the filter is not actually listening to this Pi Object, then this function call will just be ignored.)
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><em>ColdFusion:</em>
+				</p>
+				<ol>
+					<li><strong>removeFilter (</strong><em>string</em><strong> property, </strong><em>object</em><strong> object, </strong><em>string</em><strong> method_name</strong><strong>)</strong> : Use three arguments  to remove a &quot;property filter&quot;.
+						<ul>
+							<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Object. NOTE: You may add a filter to a property even if the property doesn't exist yet.  It will still be fired whenever that property is requested from the Pi Object, and regardless of whether the property actually exists or not.</li>
+							<li><em>object </em><strong>object</strong> : The second argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do.</li>
+							<li><em>string </em><strong>method_name</strong>: The third argument must be the name of a method within the object specified in the second argument.</li>
+						</ul>
+					</li>
+					<li><strong>removeFilter (</strong><em>object</em><strong> object, </strong><em>string</em><strong>method_name</strong><strong>)</strong> : Use two arguments  to remove a &quot;global filter&quot;.
+<ul>
+							<li><em>object </em><strong>object</strong> : The first argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do.</li>
+							<li><em>string </em><strong>method_name</strong>: The second argument must be the name of a method within the object specified in the first argument.</li>
+						</ul>
+					</li>
+				</ol>
+				<p><em>Javascript:</em>
+				</p>
+				<ol>
+					<li><strong>removeFilter (</strong><em>string</em><strong> property, </strong>[<em>object</em><strong> scope,] </strong><em>function</em><strong> method)</strong> : Use three arguments  to remove a &quot;property filter&quot;.
+<ul>
+							<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Object. NOTE: You may add a filter to a property even if the property doesn't exist yet.  It will still be fired whenever that property is requested from the Pi Object, and regardless of whether the property actually exists or not.</li>
+							<li><em>object </em><strong>scope</strong> : [optional] The second optional argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do. If a scope is not provided, the<strong> </strong>object to which the filter is being attached is used as the scope.</li>
+							<li><em>function </em><strong>method</strong> : The third argument must be a reference to a function. This function can be a stand-alone function, or a method on an object. This function does not have to belong to the object specified in the second argument, but it can.</li>
+						</ul>
+					</li>
+					<li><strong>removeFilter (</strong>[<em>object</em><strong> scope,] </strong><em>function</em><strong> method)</strong> : Use two arguments  to remove a &quot;global filter&quot;.
+<ul>
+							<li><em>object </em><strong>scope</strong> : [optional] The first optional argument must be a valid  object. It can be a Pi Object itself, but it does not need to be. Any  object will do. If a scope is not provided, the<strong> </strong>object to which the filter is being attached is used as the scope.</li>
+							<li><em>function </em><strong>method</strong> : The second argument must be a reference to a function. This function can be a stand-alone function, or a method on an object. This function does not have to belong to the object specified in the first argument, but it can.</li>
+						</ul>
+					</li>
+				</ol>
+			</blockquote>
+			<p>Examples:</p>
+			<blockquote>
+				<p><em>ColdFusion:</em><br />
+					&lt;cfset requestManager.<a href="#removeFilter">removeFilter</a>(AccessController, &quot;setOwnerId&quot;) /&gt;<br />
+				&lt;cfset this.<a href="#removeFilter">removeFilter</a>(&quot;user_status&quot;, this, &quot;getCurrentStatus&quot;) /&gt;</p>
+				<p><em>Javascript:<br />
+					</em>requestManager.<a href="#removeFilter">removeFilter</a>(AccessController.setOwnerId);<br />
+				this.<a href="#removeFilter">removeFilter</a>(&quot;user_status&quot;, User.prototype.getCurrentStatus);</p>
+			</blockquote>
+			<p>CAUTION: To remove a filter, you must provide exactly the same arguments as when the filter was added. For example, if you add a filter with a scope but try to remove it without specifying the scope, you will be unsuccessful.</p>
+		</blockquote>
+	</li>
+	<li><strong><a name="removeListener" id="removeListener"></a>removeListener</strong>: Removes a listener function from  the Pi Object.
+		(NOTE:	If	the listener is not actually listening to this Pi Object, then this function call will just be ignored.)
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><em>ColdFusion or Javascript:</em>
+				</p>
+				<ol>
+					<li><strong>removeListener (</strong><em>string</em><strong> property, </strong><em>object</em><strong> object, </strong><em>string</em><strong> method_name</strong><strong>)</strong> : Use three arguments  to remove a &quot;property listener&quot;.
+						<ul>
+							<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Object.</li>
+							<li><em>object </em><strong>object</strong> : The second argument must be a valid  object.</li>
+							<li><em>string </em><strong>method_name</strong>: The third argument must be the name of a method within the object specified in the second argument.</li>
+						</ul>
+					</li>
+					<li><strong>removeListener (</strong><em>object</em><strong> object, </strong><em>string</em><strong>method_name</strong><strong>)</strong> : Use two arguments  to remove a &quot;global listener&quot;.
+						<ul>
+							<li><em>object </em><strong>object</strong> : The first argument must be a valid  object.</li>
+							<li><em>string </em><strong>method_name</strong>: The second argument must be the name of a method within the object specified in the first argument.</li>
+						</ul>
+					</li>
+				</ol>
+				<p><em>Javascript only:</em>
+				</p>
+				<ol>
+					<li><strong>removeListener (</strong><em>string</em><strong> property, </strong>[<em>object</em><strong> scope,] </strong><em>function</em><strong> method</strong><strong>)</strong> : Use three arguments  to remove a &quot;property listener&quot;.
+						<ul>
+							<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Object.</li>
+							<li><em>object </em><strong>scope</strong> : [optional] The second optional argument must be a valid  object. If a scope is not provided, the<strong> </strong>object to which the filter is being attached is used as the default scope.</li>
+							<li><em>function </em><strong>method</strong> : The second or third argument must be a reference to a function.</li>
+						</ul>
+					</li>
+					<li><strong>removeListener (</strong>[<em>object</em><strong> scope,] </strong><em>function</em><strong> method</strong><strong>)</strong> : Use two arguments  to remove a &quot;global listener&quot;.
+						<ul>
+							<li><em>object </em><strong>scope</strong> : [optional] The first optional argument must be a valid  object. If a scope is not provided, the<strong> </strong>object to which the filter is being attached is used as the scope.</li>
+							<li><em>function </em><strong>method</strong> : The first or second argument must be a reference to a function.</li>
+						</ul>
+					</li>
+				</ol>
+			</blockquote>
+			<p>Examples:</p>
+			<p>These first two calls will clean up the listeners added during the examples in the <a href="#addListener">addListener</a> section of this documentation.</p>
+			<blockquote>
+				<p><em>ColdFusion:</em><br />
+					&lt;cfset pages.<a href="#removeListener">removeListener</a>(TrafficMunkey, &quot;addURLVariable&quot;) /&gt;<br />
+				&lt;cfset page.<a href="#removeListener">removeListener</a>(&quot;url&quot;, TrafficMunkey, &quot;addURLVariable&quot;) /&gt;				 </p>
+				<p><em>Javascript:<br />
+					</em>pages.<a href="#removeListener">removeListener</a>(TrafficMunkey, TrafficMunkey.addURLVariable);<br />
+				page.<a href="#removeListener">removeListener</a>(&quot;url&quot;, TrafficMunkey, TrafficMunkey.addURLVariable);</p>
+	</blockquote>
+			<p>This next example assumes that IDs will not change, and so once it's done it's job it will remove itself. In other words, this method will only ever be executed once per object.</p>
+			<blockquote>
+				<p><em>ColdFusion:<br />
+					</em>// Property Listener Setup Code: <br />
+					&lt;cfset page.<a href="#addListener">addListener</a>(&quot;pageId&quot;, TrafficMunkey, &quot;addURLVariable&quot;, true) /&gt;<br />
+					...<br />
+					// 
+					Property Listener Method:<br />
+					&lt;cfcomponent&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;addURLVariable&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;oldValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;newValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;cfif Arguments.newValue neq &quot;&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;cfset Arguments.object.<a href="setters.html#set">set</a>(&quot;url&quot;, &quot;#this.<a href="getters.html#get">get</a>('baseURL')#?#this.<a href="getters.html#get">get</a>('urlVariable')#=#Arguments.newValue#&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;cfset Arguments.object.<a href="#removeListener">removeListener</a>(&quot;pageId&quot;, this, &quot;addURLVariable&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/cfif&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+				&lt;/cfcomponent&gt; </p>
+				<p><em>Javascript:</em><br />
+					page.<a href="#addListener">addListener</a>(&quot;pageId&quot;, TrafficMunkey, TrafficMunkey.addURLVariable);<br />
+					...<br />
+					TrafficMunkey.prototype.addURLVariable = fuction(object,property,oldValue,newValue) {<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.<a href="setters.html#set">set</a>(&quot;url&quot;, this.<a href="getters.html#get">get</a>('baseURL') + &quot;?&quot; + this.<a href="getters.html#get">get</a>('urlVariable') + &quot;=&quot; + newValue );<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;  object.<a href="#removeListener">removeListener</a>(&quot;pageId&quot;, this, this.addURLVariable);<br />
+					}
+				</p>
+			</blockquote>
+		</blockquote>
+	</li>
+</ul>
+
+				<p>&nbsp;</p>
+			
+		</td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+	  <td width="220" valign="top" bgcolor="#DDDDDD"><p style="text-align:center"><a href="http://www.twitter.com/millionmunkeys"><img src="http://twitter-badges.s3.amazonaws.com/follow_us-b.png" alt="Follow millionmunkeys on Twitter"/></a>
+	      <p></td>
+  </tr>
+	<tr>
+		<td colspan="2" align="center" valign="top" bgcolor="#DDDDDD"><p>Copyright &copy;2010, MillionMunkeys&reg; LLC, All Rights Reserved</p></td>
+	</tr>
+</table>
+</body>
+</html>
+	

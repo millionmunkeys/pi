@@ -1,0 +1,541 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>
+		
+			Getter Functions
+		
+		- PiMunkey Documentation - MillionMunkeys.net
+	</title>
+	<link href="MillionMunkeys.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+	<!--
+	.NewWindow {
+		font-size: smaller;
+	}
+	-->
+	</style>
+
+</head>
+
+<body link="#AE854C" vlink="#908B76" alink="#002377">
+<table width="90%" align="center" cellpadding="10" cellspacing="1" class="MainLayout">
+	<tr bgcolor="#FFFFFF">
+		<td colspan="2" align="center" valign="top" bgcolor="#002377"><a href="http://www.millionmunkeys.net/"><img src="MillionMunkeysLogoMunkey.jpg" alt="MillionMunkeys.net" width="525" height="100" border="0" longdesc="MillionMunkeys Logo"></a></td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+		<td width="220" align="left" valign="top" bgcolor="#FFFFFF">
+			<table width="200" border="0" cellpadding="0" cellspacing="0" id="navigation">
+				
+		
+		
+			
+			
+		
+		
+		
+		
+
+		
+			
+			
+				
+				
+				
+				
+				
+
+			
+			
+			
+			
+				
+				
+				
+				
+					
+				
+				
+					
+					
+					
+				
+				
+				
+				
+				
+				
+			
+			
+			
+			
+				
+				
+		
+		
+				
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="index.html">What is Pi Programming?</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="whatsnew.html">What's New</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="structures.html">Arrays vs. Structs</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong>Pi Object Reference</strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="getters.html">Getter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="setters.html">Setter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="functions.html">Listener & Filter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+			</table>
+			<p>&nbsp;</p>
+		</td>
+		<td width="*" rowspan="2" valign="top" bgcolor="#FFFFFF">
+			
+				<p>
+					
+					
+						
+						<a href="">PiMunkey Documentation</a> ->
+					
+						
+						<a href="getters.html">Pi Object Reference</a> ->
+					
+				</p>
+				
+					<h2>Getter Functions</h2>
+				
+				<style type="text/css">
+<!--
+.cfdump {
+	border: 1px solid;
+	background-color: #00C;
+	border-top-color: #00C;
+	border-right-color: #00C;
+	border-bottom-color: #00C;
+	border-left-color: #00C;
+	padding:0px;
+	
+}
+.cfdump th {
+	border: 1px solid #00C;
+	background-color: #44C;
+	font-weight:normal;
+}
+.cfdump td.name {
+	background-color:#9CF;
+}
+.cfdump td.value {
+	background-color:#FFF;
+}
+-->
+</style>
+<p>&nbsp;</p>
+<ul>
+	<li><strong><a name="exists" id="exists"></a>exists</strong>: Returns a boolean value indicating whether or not the specified property exists within the object.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>exists (</strong><em>integer</em><strong> index)</strong> : Indicates whether or not an item exists at the specified position in the object.</li>
+				<li><strong>exists (</strong><em>string</em><strong> propertyName)</strong> : Indicates whether or not there is an item associated with the given name.</li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p><em>ColdFusion:</em><br />
+					&lt;cfif object.<a href="#exists">exists</a>(1)&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset object.<a href="setters.html#insertAt">insertAt</a>(1, newItem)
+					/&gt;<br />
+					&lt;cfelse&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset object.<a href="setters.html#add">add</a>(newItem) /&gt;<br />
+					&lt;/cfif&gt;<br />
+					<br />
+					&lt;cfif not object.<a href="#exists">exists</a>(&quot;url&quot;) and object.<a href="#exists">exists</a>(&quot;id&quot;)&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset object.<a href="setters.html#set">set</a>(&quot;url&quot;, &quot;#this.<a href="#get">get</a>('baseURL')#?#this.<a href="#get">get</a>('urlVariable')#=#object.<a href="#get">get</a>('id')#&quot;) /&gt;<br />
+					&lt;/cfif&gt; </p>
+				<p><em>Javascript:<br />
+				</em>if ( object.<a href="#exists">exists</a>(1) )<br />
+&nbsp;&nbsp;&nbsp;&nbsp; object.<a href="setters.html#insertAt">insertAt</a>(1, newItem);<br />
+else<br />
+&nbsp;&nbsp;&nbsp;&nbsp; object.<a href="setters.html#add">add</a>(newItem);<br />
+<br />
+if ( !object.<a href="#exists">exists</a>(&quot;url&quot;) &amp;&amp; object.<a href="#exists">exists</a>(&quot;id&quot;) )<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; object.<a href="setters.html#set">set</a>( &quot;url&quot;, this.<a href="#get">get</a>('baseURL') + &quot;?&quot; + this.<a href="#get">get</a>('urlVariable') + &quot;=&quot; + object.<a href="#get">get</a>('id') );</p>
+</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="get" id="get"></a>get</strong>:	Returns either the value of a property, the item at the specified index, or the empty string if nothing found.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>get (</strong><em>string</em><strong> propertyName)</strong> : Pass a string to the &quot;get&quot; function and it will return the item associated with that property name. If no item exists, it will return the empty string.</li>
+				<li><strong>get (</strong><em>integer</em><strong> index)</strong> : Pass an integer to the &quot;get&quot; function and it will return the item at that position in the object. If no item exists, it will return the empty string. </li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p><em>ColdFusion:</em><br />
+					&lt;cfloop from=&quot;1&quot; to=&quot;#object.<a href="#getLength">getLength</a>()#&quot; index=&quot;i&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset nextItem = object.<a href="#get">get</a>(i) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset titleList = ListAppend(titleList, nextItem.<a href="#get">get</a>(&quot;title&quot;)) /&gt;<br />
+				&lt;/cfloop&gt;<br />
+				&lt;cfreturn titleList /&gt;
+				</p>
+				<p><em>Javascript:</em><br />				   
+					var nextItem, titles=[];<br />
+					for (var i=0; i &lt; object.<a href="#getLength">getLength</a>(); i++) {<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; nextItem = object.<a href="#get">get</a>(i);<br />
+&nbsp;&nbsp;&nbsp;&nbsp; titles.push(  nextItem.<a href="#get">get</a>(&quot;title&quot;) );<br />
+}
+<br />
+				return titles.join(&quot;,&quot;);</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="getIndex" id="getIndex"></a>getIndex</strong>: Returns the index of the property's numeric position within the object. Returns zero if the property is not found.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>getIndex (</strong><em>string</em><strong> propertyName)</strong></p>
+			</blockquote>
+			<p>Examples:</p>
+			<blockquote>
+				<p><em>ColdFusion:</em> &lt;cfset index = object.<a href="#getIndex">getIndex</a>(&quot;title&quot;) /&gt;<br />
+				<em>result:</em> 2 // starting index of 1</p>
+				<p><em>Javascript:</em> index = object.<a href="#getIndex">getIndex</a>(&quot;title&quot;);<br />
+				<em>result:</em>1 // starting index of 0</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="getLength" id="getLength"></a>getLength</strong>: Returns the total number of properties of this object. This function is most useful when the PiComponent is being used as an Array, but it may also be used with named properties as well.
+		<blockquote>
+			<p>Examples: </p>
+			<blockquote>
+				<p><em>ColdFusion:</em><br />
+					&lt;cfloop from=&quot;1&quot; to=&quot;#object.<a href="#getLength">getLength</a>()#&quot; index=&quot;i&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset titleList = ListAppend(titleList, object.<a href="#get">get</a>(i).<a href="#get">get</a>(&quot;title&quot;)) /&gt;<br />
+&lt;/cfloop&gt; </p>
+				<p><em>Javascript:</em><br />
+				for (var i=0, titles=[]; i &lt; object.<a href="#getLength">getLength</a>(); i++)<br />
+&nbsp;&nbsp;&nbsp;&nbsp; titles.push(  object.<a href="#get">get</a>(i).<a href="#get">get</a>(&quot;title&quot;) );</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="getPrivate" id="getProperty2"></a>getPrivate</strong>: [ColdFusion only] Returns a private scope of variables that are only available from within the object. Under the hood, it returns its own Pi object, so all of the same functions are available with the private scope.	</li>
+	<blockquote>
+		<p>Example:</p>
+		<blockquote>
+			<p>&lt;cfset <a href="#getPrivate">getPrivate</a>().<a href="setters.html#set">set</a>(&quot;mySSN&quot;,&quot;111-11-1111&quot;) /&gt;<br />
+				&lt;cfset <a href="functions.html#addFilter">addFilter</a>(&quot;SSN&quot;,this,&quot;maskSSN&quot;) /&gt;<br />
+				&lt;cffunction name=&quot;maskSSN&quot;&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfreturn &quot;XXX-XX-&quot; &amp; Right(<a href="#getPrivate">getPrivate</a>().<a href="#get">get</a>(&quot;mySSN&quot;),4) /&gt;<br />
+				&lt;/cffunction&gt;
+			</p>
+		</blockquote>
+	</blockquote>
+	<li><strong id="getProperty" name="getProperty"><a name="getProperty" id="getProperty"></a>getProperty</strong>: Returns the name of the property  at the given index.
+		Returns	the	empty string if there is no property at the given index.
+	</li>
+</ul>
+<ul>
+	<blockquote>
+		<p>Usage:</p>
+		<blockquote>
+			<p><strong>getProperty (</strong><em>integer</em><strong> index)</strong></p>
+		</blockquote>
+		<p>Examples:</p>
+		<blockquote>
+			<p><em>ColdFusion:</em> &lt;cfset prop = object.<a href="#getProperty">getProperty</a>(1) /&gt;<br />
+				<em>Javascript:</em> prop = object.<a href="#getProperty">getProperty</a>(0);<br />
+				<em>result:</em> &quot;id&quot;</p>
+		</blockquote>
+	</blockquote>
+	<li><strong><a name="getPropertyList" id="getPropertyList"></a>getPropertyList</strong>: Returns a list of all of the properties of this object.		
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>getPropertyList ( )</strong> : Returns a list of all the unique property names within the object.</li>
+				<li><strong>getPropertyList (</strong><em>string</em><strong> propertyName)</strong> :  If the PiComponent is being used as an Array of other PiComponents, or as an array of Structs, you can optionally pass the name of a property to build a list of the values of that property for each item in the Array.</li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p><em>ColdFusion: </em>&lt;cfset propertyList = object.<a href="#getPropertyList">getPropertyList</a>() /&gt;<br />
+					<em>Javascript:</em> propertyList = object.<a href="#getPropertyList">getPropertyList</a>();<br />
+				<em>result: </em>&quot;id,title,template&quot;</p>
+				<p>
+					<em>ColdFusion: </em>&lt;cfset titleList = pages.<a href="#getPropertyList">getPropertyList</a>(&quot;title&quot;) /&gt;<br />
+					<em>result:</em> &quot;Creating Your Application.cfc,Creating a Site Template,Adding Breadcrumbs&quot;					<br />
+					<em>Javascript: </em>titles = pages.<a href="#getPropertyList">getPropertyList</a>(&quot;title&quot;).split(&quot;,&quot;);<br />
+				<em>result:</em> [&quot;Creating Your sitemap.xml&quot;, &quot;Creating a Site Template&quot;, &quot;Adding Breadcrumbs&quot;]</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="getProtected" id="getProperty3"></a>getProtected</strong>: [ColdFusion only ] Returns a protected scope of variables that are only available to objects in the same folder. Under the hood, it returns its own Pi object, so all of the same functions are available with the protected scope.	</li>
+	<blockquote>
+		<p>Example:</p>
+		<blockquote>
+			<p>&lt;!--- User data should not be available outside of this library. ---&gt;<br />				&lt;cfset get(&quot;users&quot;).addListener(this,&quot;protectUsers&quot;) /&gt;<br />
+				&lt;cffunction name=&quot;protectUsers&quot;&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;newValue&quot; type=&quot;UserMunkey&quot; /&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset var lookup = Arguments.newValue.get(&quot;user_id&quot;) /&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset getProtected().get(&quot;users&quot;).set(lookup, Arguments.newValue) /&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; &lt;!--- Store just the &quot;user_id&quot; in the public scope. ---&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfreturn Arguments.newValue.get(&quot;user_id&quot;) /&gt;<br />
+				&lt;/cffunction&gt; </p>
+		</blockquote>
+	</blockquote>
+	<li><strong id="getUUID" name="getUUID"><a name="getUUID" id="getUUID"></a>getUUID</strong>: Returns a Universally Unique Identifier (UUID). It's perfect to checking if two variables are equal to each other.
+	</li>
+</ul>
+<ul>
+	<blockquote>
+		<p>Example:</p>
+		<blockquote>
+			<p><em>ColdFusion:</em><br />
+				&lt;cfif object1.<a href="#getUUID">getUUID</a>() eq object2.<a href="#getUUID">getUUID</a>()&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; &lt;!--- Same Object! ---&gt;<br />
+			&lt;/cfif&gt;</p>
+			<p><em>Javascript:</em><br />
+			if ( object1.<a href="#getUUID">getUUID</a>() == object2.<a href="#getUUID">getUUID</a>() )<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; // Same Object!</p>
+		</blockquote>
+	</blockquote>
+	<li><strong><a name="toStruct" id="toStruct"></a>toStruct</strong>: [ColdFusion only] A convenience function that translates the Pi object into a basic ColdFusion struct that can be dumped to a page for debugging purposes. The problem with dumping a Pi object through ColdFusion is that its internal data is hidden by design. With the toStruct function, you pass along a &quot;depth&quot; parameter to set how many levels to drill down when creating the structure. At each level, simple values will be added to the structure. Complex values will be expanded to show their members if they are within the depth requested.  If they are beyond the depth requested, they will instead just show their type, e.g. &quot;[Array]&quot;, &quot;[Object]&quot;, or &quot;[Struct]&quot;.
+		<ul>
+			<li>&quot;<em>depth</em>&quot;: [default: 1] This parameter should be a number indicating how many level within the object should be added to the structure. For example, a depth of 1 will produce all of the properties of the object and any simple values, such as strings, numbers, dates, and booleans. Complex values will show their type, e.g. &quot;[Array]&quot;, &quot;[Object]&quot;, or &quot;[Struct]&quot;, but no further details.</li>
+		</ul>
+		<blockquote>
+			<p>Examples:</p>
+			<blockquote>
+				<p>PiObject.toStruct():</p>
+				<table class="cfdump">
+					<tbody>
+						<tr>
+							<th colspan="2" onclick="cfdump_toggleTable(this);" title="click to collapse">struct</th>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">ID</td>
+							<td class="value">Security</td>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">PROPERTY1</td>
+							<td class="value">Attribute 1</td>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">PROPERTY2</td>
+							<td class="value">Attribute 2</td>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">property3</td>
+							<td class="value">[Object]</td>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">property4</td>
+							<td class="value">[Array]</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>PiObject.toStruct(2):</p>
+				<table class="cfdump">
+					<tbody>
+						<tr>
+							<th colspan="2" onclick="cfdump_toggleTable(this);" title="click to collapse">struct</th>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">ID</td>
+							<td class="value">Security</td>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">PROPERTY1</td>
+							<td class="value">Attribute 1</td>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">PROPERTY2</td>
+							<td class="value">Attribute 2</td>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">property3</td>
+							<td class="value"><table class="cfdump">
+								<tbody>
+									<tr>
+										<th colspan="2" onclick="cfdump_toggleTable(this);" title="click to collapse">struct</th>
+									</tr>
+									<tr>
+										<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">ID</td>
+										<td class="value">SubObject</td>
+									</tr>
+									<tr>
+										<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">PROPERTY1</td>
+										<td class="value">Attribute 1</td>
+									</tr>
+									<tr>
+										<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">PROPERTY2</td>
+										<td class="value">[Struct]</td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">property4</td>
+							<td class="value"><table class="cfdump">
+								<tbody>
+									<tr>
+										<th colspan="2" onclick="cfdump_toggleTable(this);" title="click to collapse">struct</th>
+									</tr>
+									<tr>
+										<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">1</td>
+										<td class="value">First</td>
+									</tr>
+									<tr>
+										<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">2</td>
+										<td class="value">Second</td>
+									</tr>
+									<tr>
+										<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">3</td>
+										<td class="value">Third</td>
+									</tr>
+									<tr>
+										<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">4</td>
+										<td class="value">Fourth</td>
+									</tr>
+									<tr>
+										<td class="name" title="click to collapse" onclick="cfdump_toggleRow(this);">5</td>
+										<td class="value">Fifth</td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+					</tbody>
+				</table>
+				<p><br />
+				</p>
+				<p>&nbsp;</p>
+			</blockquote>
+		</blockquote>
+	</li>
+</ul>
+
+				<p>&nbsp;</p>
+			
+		</td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+	  <td width="220" valign="top" bgcolor="#DDDDDD"><p style="text-align:center"><a href="http://www.twitter.com/millionmunkeys"><img src="http://twitter-badges.s3.amazonaws.com/follow_us-b.png" alt="Follow millionmunkeys on Twitter"/></a>
+	      <p></td>
+  </tr>
+	<tr>
+		<td colspan="2" align="center" valign="top" bgcolor="#DDDDDD"><p>Copyright &copy;2010, MillionMunkeys&reg; LLC, All Rights Reserved</p></td>
+	</tr>
+</table>
+</body>
+</html>
+	

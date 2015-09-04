@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body,td,th {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+body {
+	background-color: #CCCCCC;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+a:link {
+	color: #002377;
+}
+.MillionMunkeys {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 36px;
+}
+.MainLayout {
+	background-color: #CCC;
+}
+.MainLayout td, .MainLayout th {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.MainLayout td table td, .MainLayout td table th {
+	padding-left: 3px;
+	padding-right: 3px;
+}
+#navigation td {
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-bottom: .7em;
+}
+.CaseStudy td.screenshot {
+	padding-right: 3px;
+}
+.CaseStudy td {
+	background-color:#FFF;
+	border: thin solid #CCC;
+	padding-top: 3px;
+	padding-right: 28px;
+	padding-bottom: 3px;
+	padding-left: 3px;
+}
+.Note {
+	font-size: smaller;
+	font-style:italic;
+}
+h1 {
+	font-size:large;
+}
+h1,h3 {
+	color:#002377;
+}

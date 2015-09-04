@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>
+		
+			Arrays vs. Structs
+		
+		- PiMunkey Documentation - MillionMunkeys.net
+	</title>
+	<link href="MillionMunkeys.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+	<!--
+	.NewWindow {
+		font-size: smaller;
+	}
+	-->
+	</style>
+
+</head>
+
+<body link="#AE854C" vlink="#908B76" alink="#002377">
+<table width="90%" align="center" cellpadding="10" cellspacing="1" class="MainLayout">
+	<tr bgcolor="#FFFFFF">
+		<td colspan="2" align="center" valign="top" bgcolor="#002377"><a href="http://www.millionmunkeys.net/"><img src="MillionMunkeysLogoMunkey.jpg" alt="MillionMunkeys.net" width="525" height="100" border="0" longdesc="MillionMunkeys Logo"></a></td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+		<td width="220" align="left" valign="top" bgcolor="#FFFFFF">
+			<table width="200" border="0" cellpadding="0" cellspacing="0" id="navigation">
+				
+		
+		
+			
+			
+		
+		
+		
+		
+
+		
+			
+			
+				
+				
+				
+				
+				
+
+			
+			
+			
+			
+				
+				
+				
+				
+					
+				
+				
+					
+					
+					
+				
+				
+				
+				
+				
+				
+			
+			
+			
+			
+				
+				
+		
+		
+				
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="index.html">What is Pi Programming?</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="whatsnew.html">What's New</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="structures.html">Arrays vs. Structs</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong>Pi Object Reference</strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="getters.html">Getter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="setters.html">Setter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="functions.html">Listener & Filter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+			</table>
+			<p>&nbsp;</p>
+		</td>
+		<td width="*" rowspan="2" valign="top" bgcolor="#FFFFFF">
+			
+				<p>
+					
+					
+						
+						<a href="index.html">PiMunkey Documentation</a> ->
+					
+				</p>
+				
+					<h2>Arrays vs. Structs</h2>
+				
+				<blockquote>
+	<p>Collections of data in ColdFusion are commonly stored in either structures or arrays. With Pi Programming, both are handled by the same object.</p>
+	<h4>Array Notation</h4>
+	<p>Ordered arrays are not accessed by named attributes, but by their index within the object. You can use the &quot;<a href="PiComponent.html#add">add</a>&quot;, &quot;<a href="#insertAt">insertAt</a>&quot;, and &quot;<a href="#remove">remove</a>&quot; functions to add and remove properties based on their location in the object, rather than their name.</p>
+	<p>Example:</p>
+	<blockquote>
+		<p>&lt;cfset var site = <a href="PiComponent.html#newMunkey">newMunkey</a>() /&gt;<br />			&lt;cfset var page1 = <a href="PiComponent.html#newMunkey">newMunkey</a>(title=&quot;Page1&quot;) /&gt;<br />
+			&lt;cfset var page2	= <a href="PiComponent.html#newMunkey">newMunkey</a>(title=&quot;Page2&quot;) /&gt;	<br />
+			&lt;cfset var index = site.<a href="PiComponent.html#add">add</a>(page2) /&gt;
+			<br />
+			&lt;cfset site.<a href="PiComponent.html#insertAt">insertAt</a>(index,page1) /&gt;<br />
+			&lt;cfset site.<a href="PiComponent.html#remove">remove</a>(2) /&gt;
+		</p>
+	</blockquote>
+	<p>Result:</p>
+	<blockquote>
+		<p>The above example creates two pages and adds them to a Pi Array called &quot;site&quot;. The second page is added first by appending it to the end of the array. The first page, in this example, is then inserted before the second page, putting the pages in the correct order. As a last step, the second page is then removed.</p>
+	</blockquote>
+	<h4>Struct Notation</h4>
+	<p>Named properties are added by their IDs, and can be accessed in the same way. They can also be added one at a time or in batches.</p>
+	<p>Example:</p>
+	<blockquote>
+		<p>&lt;cfset page = <a href="PiComponent.html#newMunkey">newMunkey</a>() /&gt;<br />
+			&lt;cfset page.<a href="PiComponent.html#set">set</a>(&quot;id&quot;,&quot;page1&quot;) /&gt;<br />
+			&lt;cfset page.<a href="PiComponent.html#set">set</a>(title=&quot;First Page&quot;, template=&quot;firstpage.html&quot;, 
+			group=&quot;products&quot;) /&gt;<br />
+			&lt;cfset page.<a href="PiComponent.html#remove">remove</a>(&quot;group&quot;) /&gt;<br />
+			&lt;cfreturn page.<a href="PiComponent.html#get">get</a>(&quot;title&quot;) /&gt;
+		</p>
+	</blockquote>
+	<p>Result:</p>
+	<blockquote>
+		<p>The above example sets four properties, &quot;id&quot;, &quot;title&quot;, &quot;template&quot;, and &quot;group&quot;, then removes the &quot;group&quot; property and returns the &quot;title&quot; property.</p>
+	</blockquote>
+</blockquote>
+
+				<p>&nbsp;</p>
+			
+		</td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+	  <td width="220" valign="top" bgcolor="#DDDDDD"><p style="text-align:center"><a href="http://www.twitter.com/millionmunkeys"><img src="http://twitter-badges.s3.amazonaws.com/follow_us-b.png" alt="Follow millionmunkeys on Twitter"/></a>
+	      <p></td>
+  </tr>
+	<tr>
+		<td colspan="2" align="center" valign="top" bgcolor="#DDDDDD"><p>Copyright &copy;2010, MillionMunkeys&reg; LLC, All Rights Reserved</p></td>
+	</tr>
+</table>
+</body>
+</html>
+	

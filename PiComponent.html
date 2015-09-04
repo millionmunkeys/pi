@@ -1,0 +1,716 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>
+		
+			
+		
+		- PiMunkey Documentation - MillionMunkeys.net
+	</title>
+	<link href="MillionMunkeys.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+	<!--
+	.NewWindow {
+		font-size: smaller;
+	}
+	-->
+	</style>
+
+</head>
+
+<body link="#AE854C" vlink="#908B76" alink="#002377">
+<table width="90%" align="center" cellpadding="10" cellspacing="1" class="MainLayout">
+	<tr bgcolor="#FFFFFF">
+		<td colspan="2" align="center" valign="top" bgcolor="#002377"><a href="http://www.millionmunkeys.net/"><img src="MillionMunkeysLogoMunkey.jpg" alt="MillionMunkeys.net" width="525" height="100" border="0" longdesc="MillionMunkeys Logo"></a></td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+		<td width="220" align="left" valign="top" bgcolor="#FFFFFF">
+			<table width="200" border="0" cellpadding="0" cellspacing="0" id="navigation">
+				
+		
+		
+			
+			
+		
+		
+		
+		
+
+		
+			
+			
+				
+				
+				
+				
+				
+
+			
+			
+			
+			
+				
+				
+				
+				
+					
+				
+				
+					
+					
+					
+				
+				
+				
+				
+				
+				
+			
+			
+			
+			
+				
+				
+		
+		
+				
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="index.html">What is Pi Programming?</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="whatsnew.html">What's New</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="structures.html">Arrays vs. Structs</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong>Pi Object Reference</strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="getters.html">Getter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="setters.html">Setter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="functions.html">Listener & Filter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+			</table>
+			<p>&nbsp;</p>
+		</td>
+		<td width="*" rowspan="2" valign="top" bgcolor="#FFFFFF">
+			
+				<p>
+					
+					
+						
+						<a href="index.html">PiMunkey Documentation</a> ->
+					
+				</p>
+				
+					<h2></h2>
+				
+				<blockquote>
+	<p>A Pi Component is a ColdFusion object the conforms to the Property-Invocation (&quot;Pi&quot;) programming standard. Property-Invocation is the next evolution beyond &quot;Event-Driven Architecture&quot;, the programming philosophy behind most of the major ColdFusion frameworks. Event-driven is a very powerful approach, but the problem is that if you forget  an event in your design, you might paint yourself into a corner. If you forget to leave a plugin point, you may be stuck with a major rewrite to add it later.</p>
+	<p>Property-Invocation instead builds on the &quot;Java Bean&quot; idea of using a &quot;getter&quot; and &quot;setter&quot; for every property, and leverages that to provide an infinite number of plugin points. Every property is set using the &quot;<a href="#set">set</a>&quot; function and retrieved using the &quot;<a href="#get">get</a>&quot; function. Then every function is either a &quot;<a href="#listeners">listener</a>&quot; that gets fired when a property is set or a &quot;<a href="#filters">filter</a>&quot; that gets fired when a property is retrieved.</p>
+	</blockquote>
+<h3>Structs vs. Arrays</h3>
+<blockquote>
+	<p>Collections of data in ColdFusion are commonly stored in either structures or arrays. With Pi Programming, both are handled by the same object.</p>
+	<h4>Arrays</h4>
+	<p>Ordered arrays are not accessed by named attributes, but by their index within the object. You can use the &quot;<a href="PiComponent.html#add">add</a>&quot;, &quot;<a href="#insertAt">insertAt</a>&quot;, and &quot;<a href="#remove">remove</a>&quot; functions to add and remove properties based on their location in the object, rather than their name.</p>
+	<p>Example:</p>
+	<blockquote>
+		<p>&lt;cfset var site = <a href="PiComponent.html#newMunkey">newMunkey</a>() /&gt;<br />			&lt;cfset var page1 = <a href="PiComponent.html#newMunkey">newMunkey</a>(title=&quot;Page1&quot;) /&gt;<br />
+&lt;cfset var page2	= <a href="PiComponent.html#newMunkey">newMunkey</a>(title=&quot;Page2&quot;) /&gt;	<br />
+			&lt;cfset var index = site.<a href="PiComponent.html#add">add</a>(page2) /&gt;
+			<br />
+			&lt;cfset site.<a href="PiComponent.html#insertAt">insertAt</a>(index,page1) /&gt;<br />
+			&lt;cfset site.<a href="PiComponent.html#remove">remove</a>(2) /&gt;
+		</p>
+	</blockquote>
+	<p>Result:</p>
+	<blockquote>
+		<p>The above example creates two pages and adds them to a Pi Array called &quot;site&quot;. The second page is added first by appending it to the end of the array. The first page, in this example, is then inserted before the second page, putting the pages in the correct order. As a last step, the second page is then removed.</p>
+	</blockquote>
+	<h4>Structs</h4>
+	<p>Named properties are added by their IDs, and can be accessed in the same way. They can also be added one at a time or in batches.</p>
+	<p>Example:</p>
+	<blockquote>
+		<p>&lt;cfset page = <a href="PiComponent.html#newMunkey">newMunkey</a>() /&gt;<br />
+			&lt;cfset page.<a href="PiComponent.html#set">set</a>(&quot;id&quot;,&quot;page1&quot;) /&gt;<br />
+			&lt;cfset page.<a href="PiComponent.html#set">set</a>(title=&quot;First Page&quot;, template=&quot;firstpage.cfm&quot;, 
+		group=&quot;products&quot;) /&gt;<br />
+		&lt;cfset page.<a href="PiComponent.html#remove">remove</a>(&quot;group&quot;) /&gt;<br />
+		&lt;cfreturn page.<a href="PiComponent.html#get">get</a>(&quot;title&quot;) /&gt;
+		</p>
+	</blockquote>
+	<p>Result:</p>
+	<blockquote>
+		<p>The above example sets four properties, &quot;id&quot;, &quot;title&quot;, &quot;template&quot;, and &quot;group&quot;, then removes the &quot;group&quot; property and returns the &quot;title&quot; property.</p>
+	</blockquote>
+</blockquote>
+<h3>Listeners vs. Filters</h3>
+<blockquote>
+	<h4><a name="listeners" id="listeners"></a>Listeners</h4>
+	<p>Listeners are fired whenever the <a href="PiComponent.html#set">set</a>() function is called. They can be either &quot;global listeners&quot; or &quot;property listeners&quot;. Global Listeners are fired whenever anything changes on a Pi Component. They are most commonly used with Pi Components acting as Arrays, but can also be used Pi Components acting as structs. Property Listeners, in contrast, are only fired when one particular property changes on the object. The possibilities are almost limitless on how to use a listener. You can use them to update other values when a key value changes, or to override or rollback a change when certain conditions occur. When using &quot;global listeners&quot; on a Pi Array, you can ensure that certain actions happen, regardless of where in your code an item is added to the Array. Some other coder on your team could create an entirely new page that adds objects to your Pi Component, and you don't have to worry about them remembering to also include your special processing code. It will automatically execute.</p>
+	<p>For more details and examples, see the sections below on &quot;<a href="PiComponent.html#addListener">addListener</a>&quot; and &quot;<a href="PiComponent.html#removeListener">removeListener</a>&quot;.</p>
+	<h4><a name="filters" id="filters"></a>Filters</h4>
+	<p>Filters are fired whenever the <a href="PiComponent.html#get">get</a>() function is called. As with listeners, they can be either &quot;global filters&quot; or &quot;property filters&quot;. Global Filters intercept any request made on a Pi Component. Property filters  intercept requests for only one particular property on a Pi Component. You can use filters mask or hide information, or to add additional information based upon the requestor. You can also use them to create &quot;virtual properties,&quot; i.e. add a filter for a property that doesn't actually exists. If someone requests that property, your filter method can instead calculate an answer and return it to the requestor. And as with listeners, you setup your filters on your objects and then it doesn't matter who uses your objects. Someone else on your team could create new code that requests a property or an object, and they won't have to remember to do any special processing or conditional code. They just request the property and use the result.</p>
+<p>For more details and examples, see the sections below on &quot;<a href="PiComponent.html#addFilter">addFilter</a>&quot; and &quot;<a href="PiComponent.html#removeFilter">removeFilter</a>&quot;.</p>
+<h4>Unanticipated Extendability</h4>
+<p>The extra benefit of listeners and filters is the unanticipated tangle. Perhaps you're two weeks from delivery and the client says that they forgot that they need an audit trail. Anytime anything changes on a request, they want to log it to a file. There's no telling how many places in your code might edit the object. With Pi Components, though, it's no problem. Just add a global listener to your collection, which listens to anything object added to it and writes to the log file whenever any property on any item is modified.</p>
+<p>This is the tragic flaw of &quot;event-driven&quot; methodology. If you had never added an &quot;edit&quot; event to your objects, you would still have to go through every place in your code where the object is edited and fire this new &quot;edit&quot; event. With Property-Invocation, everything is a potential plugin point, with no additional work and little to no additional overhead in execution time.</p>
+</blockquote>
+<h3>Methods</h3>
+<ul>
+	<li><strong><a name="add" id="add"></a>add</strong>: Appends values to the end of a PiComponent when used as an Array.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>add (</strong><em>any</em><strong> item1 [, </strong><em>any</em><strong> item2, ... </strong><em>any</em><strong> itemN])</strong> : Pass one or more items to be added to the end of the array. The items may be of any data type. To add items to the beginning or in the middle of an array, use the &quot;<a href="PiComponent.html#insertAt">insertAt</a>&quot; function.</p>
+			</blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p><em>code:</em> <br />
+					&lt;cfset numbers = <a href="PiComponent.html#newMunkey">newMunkey</a>(1,3,5,7) /&gt;<br />
+					&lt;cfset numbers.<a href="PiComponent.html#add">add</a>(2,4,6) /&gt;</p>
+				<p><em>result:</em> 1,3,5,7,2,4,6</p>
+			</blockquote>
+			<p>NOTE: The <a href="PiComponent.html#add">add</a>() function will not accept named attributes.</p>
+		</blockquote>
+	</li>
+	<li><strong><a name="addFilter" id="addFilter"></a>addFilter</strong>: Adds a filter function to either the entire object as a whole, or a specific property within the object. NOTE: You may add a filter to a property even if the property doesn't exist yet.  It will still be fired whenever that property is requested from the Pi Component, and regardless of whether the property actually exists or not.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>addFilter (</strong><em>Object</em><strong> object, </strong><em>string</em><strong> method</strong><strong>)</strong> : Use two arguments to add a &quot;global filter&quot; that fires whenever any item is requested from the Pi Component. This format is particularly useful when using Pi Components as arrays. </li>
+				<ul>
+					<li><em>Object </em><strong>object</strong> : The first argument must be a valid ColdFusion object. It can be a Pi Component itself, but it does not need to be. Any ColdFusion object will do.</li>
+					<li><em>string </em><strong>method</strong> : The second argument must be the name of a method within the object specified in the first argument.</li>
+				</ul>
+				<li><strong>addFilter (</strong><em>string</em><strong> property, </strong><em>Object</em><strong> object, </strong><em>string</em><strong> method</strong><strong>)</strong> : Use three arguments to add a &quot;property filter&quot; that fires whenever the specified property is requested from the Pi Component.
+					<ul>
+						<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Component. NOTE: You may add a filter to a property even if the property doesn't exist yet.  It will still be fired whenever that property is requested from the Pi Component, and regardless of whether the property actually exists or not.</li>
+						<li><em>Object </em><strong>object</strong> : The second argument must be a valid ColdFusion object. It can be a Pi Component itself, but it does not need to be. Any ColdFusion object will do.</li>
+						<li><em>string </em><strong>method</strong> : The third argument must be the name of a method within the object specified in the second argument.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>Filter Method Arguments:</p>
+			<ol>
+				<li><strong>object</strong>: A reference to the Pi Component.</li>
+				<li><strong>property</strong>: The name of the property being requested. NOTE: This argument is always passed to the filter, regardless of whether the filter is a &quot;global filter&quot; or a &quot;property filter&quot;.</li>
+				<li><strong>value</strong>: The value of the property being returned. If the property does not  exist, this value will be the empty string.</li>
+			</ol>
+			<p>Filter Method Result:</p>
+			<p>If you do not use a &lt;cfreturn&gt; tag within your filter method, then the &quot;value&quot; argument passed to your method will be passed back to the calling template unmodified. If you do use a &lt;cfreturn&gt; tag within your filter method, however, you will override the value being passed into your filter method. This will not change the value of the item in the Pi Component, but it will change the value returned to the calling template. </p>
+			<p>CAUTION: If you edit the value of the property in the Pi Component, but do not return the new value with a &lt;cfreturn&gt; tag, then the calling template will still receive the original value.</p>
+			<p>Examples:</p>
+			<p>In this first example we're going to add a global filter to an array of requests in a workflow. Anytime a request is retrieved we want to assign that request to the user so that other people don't try to claim it.</p>
+			<blockquote>
+				<p><em>Array Filter Setup Code:</em> <br />
+					&lt;cfset requestManager.<a href="PiComponent.html#addFilter">addFilter</a>(AccessController, &quot;setOwnerId&quot;) /&gt;</p>
+				<p><em>Global Filter Method:</em><br />
+					&lt;cfcomponent hint=&quot;Manages Access and Permissions to Objects&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;setOwnerId&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;value&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset var object = Arguments.value /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset object.<a href="PiComponent.html#set">set</a>(&quot;ownerId&quot;, GetAuthUser()) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+			</blockquote>
+			<p>In this second example we're going to add a filter to non-existant &quot;user_status&quot; property. Whenever someone requests this property, we're going to instead show them the user's first name, last name, and the number of requests that they are currently processing.</p>
+			<blockquote>
+				<p><em>Property Filter Setup Code:</em> <br />
+					&lt;cfset this.<a href="PiComponent.html#addFilter">addFilter</a>(&quot;user_status&quot;, this, &quot;getCurrentStatus&quot;) /&gt;</p>
+				<p><em>Property Filter Method:</em><br />
+					&lt;cfcomponent hint=&quot;User Object&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;getCurrentStatus&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;value&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfreturn &quot;#this.<a href="PiComponent.html#get">get</a>('first_name')# #this.<a href="PiComponent.html#get">get</a>('last_name')# (#this.<a href="PiComponent.html#get">get</a>('myRequests').<a href="PiComponent.html#getLength">getLength</a>()#)&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="addListener" id="addListener"></a>addListener</strong>: Adds a listener function to either the entire object as a whole, or a specific property within the object.  NOTE: You may add a listener to a property even if the property doesn't exist yet.  It will be fired when the property is added to the object.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>addListener (</strong><em>Object</em><strong> object, </strong><em>string</em><strong> method [, </strong><em>boolean</em><strong> applyToExisting])</strong> : Use two arguments (with an optional boolean third argument) to add a &quot;global listener&quot; that fires whenever any property is modified on the Pi Component. This format is particularly useful when using Pi Components as arrays. </li>
+				<ul>
+					<li><em>Object </em><strong>object</strong> : The first argument must be a valid ColdFusion object. It can be a Pi Component itself, but it does not need to be. Any ColdFusion object will do.</li>
+					<li><em>string </em><strong>method</strong> : The second argument must be the name of a method within the object specified in the first argument.</li>
+					<li><em>boolean </em><strong>applyToExisting</strong> : [default = true] The optional third argument determines whether the method should be immediately fired after being added. If the Pi Component is not empty, the listener function will be fired once for each item in the object.</li>
+				</ul>
+				<li><strong>addListener (</strong><em>string</em><strong> property, </strong><em>Object</em><strong> object, </strong><em>string</em><strong> method [, </strong><em>boolean</em><strong> applyToExisting])</strong> : Use three arguments (with an optional boolean fourth argument) to add a &quot;property listener&quot; that fires whenever the specified property is modified on the Pi Component.
+					<ul>
+						<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Component. NOTE: You may add a listener to a property even if the property doesn't exist yet.  It will be fired when the property is added to the component.</li>
+						<li><em>Object </em><strong>object</strong> : The second argument must be a valid ColdFusion object. It can be a Pi Component itself, but it does not need to be. Any ColdFusion object will do.</li>
+						<li><em>string </em><strong>method</strong> : The third argument must be the name of a method within the object specified in the second argument.</li>
+						<li><em>boolean </em><strong>applyToExisting</strong> : [default: true] The optional fourth argument determines whether the method should be immediately fired after being added. It does not matter if the property exists or not, the method will always be executed.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>Listener Method Arguments:</p>
+			<ol>
+				<li><strong>object</strong>: A reference to the object being modified.</li>
+				<li><strong>property</strong>: The name of the property being modified. NOTE: This argument is always passed to the listener, regardless of whether the listener is a &quot;global listener&quot; or a &quot;property listener&quot;.</li>
+				<li><strong>oldValue</strong>: The value of the property before it was modified. If the property did not previously exist, this value will be the empty string.</li>
+				<li><strong>newValue</strong>: The value of the property after it was modified. If the property was removed, the value will be the empty string.</li>
+			</ol>
+			<p>Listener Method Result:</p>
+			<p>If you do not use a &lt;cfreturn&gt; tag within your listener method, then the &quot;newValue&quot; argument passed to your method will be stored in the Pi Component. If you do use a &lt;cfreturn&gt; tag within your listener method, however, you will override the value being saved.</p>
+			<p>NOTE: The value of the property has already been set by the time it reaches your listener method. If you directly edit the value of the property in the Pi Component, but do not return a value with a &lt;cfreturn&gt; tag, there's no need to worry. Your edit will NOT be overwritten after exiting your method.</p>
+			<p>Examples:</p>
+			<p>In this first example we're going to add a global listener to an array of pages. Anytime a new page is added, we want to dynamically generate a unique URL for the page based on its page ID. We're also going to run this method against any pages already in the array.</p>
+			<blockquote>
+				<p><em>Array Listener Setup Code:</em> <br />
+					&lt;cfset pages.<a href="PiComponent.html#addListener">addListener</a>(TrafficMunkey, &quot;addURLVariable&quot;, true) /&gt;</p>
+				<p><em>Global Listener Method:</em><br />
+					&lt;cfcomponent&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;addURLVariable&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;oldValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;newValue&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset var newPage = Arguments.newValue /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfif not newPage.<a href="PiComponent.html#exists">exists</a>(&quot;url&quot;) and newPage.<a href="PiComponent.html#exists">exists</a>(&quot;pageId&quot;)&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset newPage.<a href="PiComponent.html#set">set</a>(&quot;url&quot;, &quot;#this.<a href="PiComponent.html#get">get</a>('baseURL')#?#this.<a href="PiComponent.html#get">get</a>('urlVariable')#=#newPage.<a href="PiComponent.html#get">get</a>('pageId')#&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;/cfif&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+			</blockquote>
+			<p>In this second example we're going to add a listener to a single page object. If its page ID is ever changed, we want to update its URL  with a new unique URL, based on the new page ID. We also want remove its old ID from the page lookup list, and register it under its new ID. However, if the ID was deleted, then we don't want to register this page anymore, just remove it from the page lookup entirely.</p>
+			<blockquote>
+				<p><em>Property Listener Setup Code:</em> <br />
+					&lt;cfset page.<a href="PiComponent.html#addListener">addListener</a>(&quot;pageId&quot;, TrafficMunkey, &quot;addURLVariable&quot;, true) /&gt;</p>
+				<p><em>Property Listener Method:</em><br />
+					&lt;cfcomponent&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;addURLVariable&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;oldValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;newValue&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset var pageLookup = this.<a href="PiComponent.html#get">get</a>(&quot;pageLookup&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset pageLookup.<a href="PiComponent.html#remove">remove</a>(Arguments.oldValue) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfif Arguments.newValue neq &quot;&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset Arguments.object.<a href="PiComponent.html#set">set</a>(&quot;url&quot;, &quot;#this.<a href="PiComponent.html#get">get</a>('baseURL')#?#this.<a href="PiComponent.html#get">get</a>('urlVariable')#=#Arguments.newValue#&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset pageLookup.<a href="PiComponent.html#set">set</a>(Arguments.newValue, Arguments.object) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfelse&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset Arguments.object.<a href="PiComponent.html#remove">remove</a>(&quot;url&quot;) /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;/cfif&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+			</blockquote>
+			<p>In this third example we're going to add a global listener to a single page object. If anything changes, we want to mark it so we can save it to the database later.</p>
+			<blockquote>
+				<p><em>Global Listener Setup Code:</em> <br />
+					&lt;cfset page.<a href="PiComponent.html#addListener">addListener</a>(DataAccessLayer, &quot;isDirty&quot;, false) /&gt;</p>
+				<p><em>Global Listener Method:</em><br />
+					&lt;cfcomponent hint=&quot;Data Access Layer&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;isDirty&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;oldValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;newValue&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset Arguments.object.<a href="PiComponent.html#set">set</a>(&quot;isDirty&quot;, true) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="exists" id="exists"></a>exists</strong>: Returns a boolean value indicating whether or not the specified property exists within the object.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>exists (</strong><em>integer</em><strong> index)</strong> : Indicates whether or not an item exists at the specified position in the object.</li>
+				<li><strong>exists (</strong><em>string</em><strong> propertyName)</strong> : Indicates whether or not there is an item associated with the given name.</li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p>&lt;cfif object.<a href="PiComponent.html#exists">exists</a>(1)&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset object.<a href="PiComponent.html#insertAt">insertAt</a>(1, newItem)
+					/&gt;<br />
+					&lt;cfelse&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset object.<a href="PiComponent.html#add">add</a>(newItem) /&gt;<br />
+					&lt;/cfif&gt; </p>
+				<p>&lt;cfif not object.<a href="PiComponent.html#exists">exists</a>(&quot;url&quot;) and object.<a href="PiComponent.html#exists">exists</a>(&quot;id&quot;)&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset object.<a href="PiComponent.html#set">set</a>(&quot;url&quot;, &quot;#this.<a href="PiComponent.html#get">get</a>('baseURL')#?#this.<a href="PiComponent.html#get">get</a>('urlVariable')#=#object.<a href="PiComponent.html#get">get</a>('id')#&quot;) /&gt;<br />
+					&lt;/cfif&gt; </p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="get" id="get"></a>get</strong>:	Returns either the value of a property, the item at the specified index, or the empty string if nothing found.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>get (</strong><em>string</em><strong> propertyName)</strong> : Pass a string to the &quot;get&quot; function and it will return the item associated with that property name. If no item exists, it will return the empty string.</li>
+				<li><strong>get (</strong><em>integer</em><strong> index)</strong> : Pass an integer to the &quot;get&quot; function and it will return the item at that position in the object. If no item exists, it will return the empty string. </li>
+			</ol>
+			<p>Example:</p>
+			<blockquote>
+				<p>&lt;cfloop from=&quot;1&quot; to=&quot;#object.<a href="PiComponent.html#getLength">getLength</a>()#&quot; index=&quot;i&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset nextItem = object.<a href="PiComponent.html#get">get</a>(i) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset titleList = ListAppend(titleList, nextItem.<a href="PiComponent.html#get">get</a>(&quot;title&quot;)) /&gt;<br />
+					&lt;/cfloop&gt;
+				</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="getIndex" id="getIndex"></a>getIndex</strong>: Returns the index of the property's numeric position within the object. Returns zero if the property is not found.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>getIndex (</strong><em>string</em><strong> propertyName)</strong></p>
+			</blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p><em>code:</em> &lt;cfset index = object.<a href="PiComponent.html#getIndex">getIndex</a>(&quot;title&quot;) /&gt;<br />
+					<em>result:</em> 2</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="getLength" id="getLength"></a>getLength</strong>: Returns the total number of properties of this object. This function is most useful when the PiComponent is being used as an Array, but it may also be used with named properties as well.
+		<blockquote>
+			<p>Example: </p>
+			<blockquote>
+				<p>&lt;cfloop from=&quot;1&quot; to=&quot;#object.<a href="PiComponent.html#getLength">getLength</a>()#&quot; index=&quot;i&quot;&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cfset titleList = ListAppend(titleList, object.<a href="PiComponent.html#get">get</a>(i).<a href="PiComponent.html#get">get</a>(&quot;title&quot;)) /&gt;<br />
+&lt;/cfloop&gt; </p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="getProperty" id="getProperty"></a>getProperty</strong>: Returns the name of the property  at the given index.
+		Returns	the	empty string if there is no property at the given index.
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>getProperty (</strong><em>integer</em><strong> index)</strong></p>
+			</blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p><em>code:</em> &lt;cfset prop = object.<a href="PiComponent.html#getProperty">getProperty</a>(1) /&gt;<br />
+					<em>result:</em> &quot;id&quot;</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="getPropertyList" id="getPropertyList"></a>getPropertyList</strong>: Returns a list of all of the properties of this object.		
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>getPropertyList ( )</strong> : Returns a list of all the unique property names within the object.</li>
+				<li><strong>getPropertyList (</strong><em>string</em><strong> propertyName)</strong> :  If the PiComponent is being used as an Array of other PiComponents, or as an array of Structs, you can optionally pass the name of a property to build a list of the values of that property for each item in the Array.</li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p><em>code: </em>&lt;cfset propertyList = object.<a href="PiComponent.html#getPropertyList">getPropertyList</a>() /&gt;<br />
+				<em>result: </em>&quot;id,title,template&quot;</p>
+				<p>
+					<em>code: </em>&lt;cfset titleList = pages.<a href="PiComponent.html#getPropertyList">getPropertyList</a>(&quot;title&quot;) /&gt;<br />
+				<em>result:</em> &quot;Creating Your Application.cfc,Creating a Site Template,Adding Breadcrumbs&quot;</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="getUUID" id="getUUID"></a>getUUID</strong>: Returns a ColdFusion UUID to uniquely identify the PiComponent. It's perfect to checking if two variables are equal to each other.
+		<blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p>&lt;cfif object1.getUUID() eq object2.getUUID()&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; &lt;!--- Same Object! ---&gt;<br />
+				&lt;/cfif&gt;</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="insertAt" id="insertAt"></a>insertAt</strong>: 
+		<blockquote>
+			<p>Usage:</p>
+			<blockquote>
+				<p><strong>insertAt (</strong><em>integer</em><strong> index, </strong><em>any</em><strong> item1 [, </strong><em>any</em> <strong> item2, ... </strong><em>any</em><strong> itemN])</strong> : The first argument is always a ColdFusion-type numeric index, i.e. starting at 1 and going up to the length of the array. The items passed will be inserted into the array <em><strong>before</strong></em> the specified index position. The index is then followed by one or more items to be added to the array at the desired position. The items may be of any data type. To add items to the end of an array, use the &quot;<a href="PiComponent.html#add">add</a>&quot; function.</p>
+			</blockquote>
+			<p>Example:</p>
+			<blockquote>
+				<p><em>code:</em> <br />
+					&lt;cfset numbers = <a href="PiComponent.html#newMunkey">newMunkey</a>(1,3,5,7) /&gt;<br />
+&lt;cfset numbers.<a href="PiComponent.html#insertAt">insertAt</a>(2,2) /&gt;<br />
+				&lt;cfset numbers.<a href="PiComponent.html#insertAt">insertAt</a>(4,4,6) /&gt;</p>
+				<p><em>result:</em> 1,2,3,<em><strong>4</strong></em>,<em><strong>6</strong></em>,<em><strong>5</strong></em>,7 (Note that the numbers 6 and 5 are reversed, because 4 and 6 were both inserted before 5.)</p>
+			</blockquote>
+			<p>NOTE: The insertAt() function will not accept named attributes.</p>
+		</blockquote>
+	</li>
+	<li><strong><a name="newMunkey" id="newMunkey"></a>newMunkey</strong>: A shortcut function for any child of the PiComponent that returns a new instance of the base PiComponent class, and not the child class.  To get a new instance of the child class use the  'new' function.  WARNING: This function should never be overridden by a child class!
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>newMunkey ( )</strong> : Call the function without arguments to get an empty PiComponent.</li>
+				<li><strong>newMunkey (propertyName1 = </strong><em>any</em><strong> </strong><strong>item1 [, propertyName2 = </strong><em>any</em><strong> </strong><strong>item2, ... propertyNameN = </strong><em>any</em><strong> </strong><strong>itemN])</strong> : If you use the named attribute syntax in ColdFusion, the returned object will be initialized with the arguments passed. Each argument name will be used as the name of the property, and the value of the argument will be used as the associated item.</li>
+				<li><strong> newMunkey (ArgumentCollection = </strong><em>Struct</em><strong> collection)</strong> : If you use the ArgumentCollection syntax in ColdFusion, the returned object will be initialized with the values of passed structure. The name of each member of the passed structure will be used as the name of the property, and the value of each member of the structure will be used as the associated item. </li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p>Each of the following examples will produce the same object structure:</p>
+				<p>&lt;cfset object = <a href="PiComponent.html#newMunkey">newMunkey</a>() /&gt;<br />
+					&lt;cfset object.<a href="PiComponent.html#set">set</a>(id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot;) /&gt;</p>
+				<p>&lt;cfset object = <a href="PiComponent.html#newMunkey">newMunkey</a>(id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot;) /&gt;</p>
+				<p>&lt;cfset args[&quot;id&quot;] = &quot;page1&quot; /&gt;<br />
+					&lt;cfset args[&quot;title&quot;] = &quot;Page One&quot; /&gt;<br />
+					&lt;cfset args[&quot;template&quot;] = &quot;first.cfm&quot; /&gt;<br />
+					&lt;cfset object = <a href="PiComponent.html#newMunkey">newMunkey</a>(ArgumentCollection=args) /&gt;</p>
+				<p><em>Caller Page Code</em>: &lt;my:customTag id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot; /&gt;<br />
+					<em>Custom Tag Code</em>: &lt;cfset object = <a href="PiComponent.html#newMunkey">newMunkey</a>(ArgumentCollection=Attributes) /&gt; </p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="remove" id="remove"></a>remove</strong>: Removes the specified property from the object.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>remove (</strong><em>integer</em><strong> index)</strong> : Removes the item at the specified position in the object.</li>
+				<li><strong>remove(</strong><em>string</em><strong> propertyName)</strong> : Removes the item with the associated name.</li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p><em>code:<br />
+				</em>&lt;cfset numbers = <a href="PiComponent.html#newMunkey">newMunkey</a>(1,3,5,7) /&gt;<br />
+				&lt;cfset numbers.<a href="PiComponent.html#remove">remove</a>(4) /&gt;<br />
+				&lt;cfset numbers.<a href="PiComponent.html#remove">remove</a>(2) /&gt;</p>
+				<p><em>result: </em>1,5</p>
+				<p><em>code:</em><br />
+					&lt;cfset page = <a href="PiComponent.html#newMunkey">newMunkey</a>(id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot;, group=&quot;Lesson 1&quot;) /&gt;<br />
+					&lt;cfset page.<a href="PiComponent.html#remove">remove</a>(&quot;group&quot;) /&gt;<br />
+				&lt;cfset properties = page.<a href="PiComponent.html#getPropertyList">getPropertyList</a>() /&gt;</p>
+				<p><em>result:</em> The &quot;properties&quot; variable contains &quot;id,title,template&quot; because &quot;group&quot; is now gone.</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="removeFilter" id="removeFilter"></a>removeFilter</strong>: Removes a filter function from  the Pi Component.
+		NOTE:	If	the filter is not actually listening to this Pi Component, then this function call will just be ignored.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>removeFilter (</strong><em>Object</em><strong> object, </strong><em>string</em><strong> method</strong><strong>)</strong> : Use two arguments  to remove a &quot;global filter&quot;. </li>
+				<ul>
+					<li><em>Object </em><strong>object</strong> : The first argument must be a valid ColdFusion object that is listening to this Pi Component. It can be a Pi Component itself, but it does not need to be. Any ColdFusion object will do. NOTE:	If	the filter is not actually listening to this Pi Component, then removeFilter will just be ignored.</li>
+					<li><em>string </em><strong>method</strong> : The second argument must be the name of a method within the object specified in the first argument.</li>
+				</ul>
+				<li><strong>removeFilter (</strong><em>string</em><strong> property, </strong><em>Object</em><strong> object, </strong><em>string</em><strong> method</strong><strong>)</strong> : Use three arguments  to remove a &quot;property filter&quot;.
+					<ul>
+						<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Component.</li>
+						<li><em>Object </em><strong>object</strong> : The second argument must be a valid ColdFusion object that is listening to this Pi Component. It can be a Pi Component itself, but it does not need to be. Any ColdFusion object will do. NOTE:	If	the filter is not actually listening to this Pi Component, then removeFilter will just be ignored.</li>
+						<li><em>string </em><strong>method</strong> : The third argument must be the name of a method within the object specified in the second argument.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p>&lt;cfset requestManager.<a href="PiComponent.html#removeFilter">removeFilter</a>(AccessController, &quot;setOwnerId&quot;) /&gt;</p>
+				<p>&lt;cfset this.<a href="PiComponent.html#removeFilter">removeFilter</a>(&quot;user_status&quot;, this, &quot;getCurrentStatus&quot;) /&gt;</p>
+			</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="removeListener" id="removeListener"></a>removeListener</strong>: Removes a listener function from  the Pi Component.
+		NOTE:	If	the listener is not actually listening to this Pi Component, then this function call will just be ignored.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>removeListener (</strong><em>Object</em><strong> object, </strong><em>string</em><strong> method</strong><strong>)</strong> : Use two arguments  to remove a &quot;global listener&quot;. </li>
+				<ul>
+					<li><em>Object </em><strong>object</strong> : The first argument must be a valid ColdFusion object that is listening to this Pi Component. It can be a Pi Component itself, but it does not need to be. Any ColdFusion object will do. NOTE:	If	the listener is not actually listening to this Pi Component, then removeListener will just be ignored.</li>
+					<li><em>string </em><strong>method</strong> : The second argument must be the name of a method within the object specified in the first argument.</li>
+				</ul>
+				<li><strong>removeListener (</strong><em>string</em><strong> property, </strong><em>Object</em><strong> object, </strong><em>string</em><strong> method</strong><strong>)</strong> : Use three arguments  to remove a &quot;property listener&quot;.
+	<ul>
+		<li><em>string</em> <strong>property</strong> : The first argument is the name of a property within the Pi Component.</li>
+		<li><em>Object </em><strong>object</strong> : The second argument must be a valid ColdFusion object that is listening to this Pi Component. It can be a Pi Component itself, but it does not need to be. Any ColdFusion object will do. NOTE:	If	the listener is not actually listening to this Pi Component, then removeListener will just be ignored.</li>
+		<li><em>string </em><strong>method</strong> : The third argument must be the name of a method within the object specified in the second argument.</li>
+		</ul>
+				</li>
+			</ol>
+			<p>Examples:</p>
+			<p>These first two calls will clean up the listeners added during the examples in the <a href="PiComponent.html#addListener">addListener</a> section of this documentation.</p>
+			<blockquote>
+				<p>&lt;cfset pages.<a href="PiComponent.html#removeListener">removeListener</a>(TrafficMunkey, &quot;addURLVariable&quot;) /&gt;</p>
+				<p>&lt;cfset page.<a href="PiComponent.html#removeListener">removeListener</a>(&quot;url&quot;, TrafficMunkey, &quot;addURLVariable&quot;) /&gt;				 </p>
+			</blockquote>
+			<p>This next example assumes that IDs will not change, and so once it's done it's job it will remove itself. In other words, this method will only ever be executed once per object.</p>
+			<blockquote>
+				<p><em>Property Listener Setup Code:</em> <br />
+				&lt;cfset page.<a href="PiComponent.html#addListener">addListener</a>(&quot;pageId&quot;, TrafficMunkey, &quot;addURLVariable&quot;, true) /&gt;</p>
+				<p><em>Property Listener Method:</em><br />
+					&lt;cfcomponent&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;cffunction name=&quot;addURLVariable&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;object&quot; /&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;property&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;oldValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &lt;cfargument name=&quot;newValue&quot; /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;cfif Arguments.newValue neq &quot;&quot;&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;cfset Arguments.object.<a href="PiComponent.html#set">set</a>(&quot;url&quot;, &quot;#this.<a href="PiComponent.html#get">get</a>('baseURL')#?#this.<a href="PiComponent.html#get">get</a>('urlVariable')#=#Arguments.newValue#&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;cfset Arguments.object.<a href="PiComponent.html#removeListener">removeListener</a>(&quot;pageId&quot;, this, &quot;addURLVariable&quot;) /&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/cfif&gt; <br />
+					&nbsp;&nbsp;&nbsp;&nbsp; &lt;/cffunction&gt;<br />
+					&nbsp;&nbsp;&nbsp;&nbsp; ... <br />
+					&lt;/cfcomponent&gt; </p>
+	</blockquote>
+		</blockquote>
+	</li>
+	<li><strong><a name="set" id="set"></a>set</strong>: A function for direct assignment of properties, singly or in bulk.
+		<blockquote>
+			<p>Usage:</p>
+			<ol>
+				<li><strong>set (</strong><em>string</em><strong> propertyName, </strong><em>any</em><strong> item)</strong> : If you use unnamed arguments, the first argument is the unique name of the property within the object, and the second argument is what to store there. The second argument can be of any data type you want.</li>
+				<li><strong>set (propertyName1 =</strong><em> any</em><strong> </strong><strong>item1 [, propertyName2 = </strong><em>any</em><strong> </strong><strong>item2, ... propertyNameN = </strong><em>any</em><strong> </strong><strong>itemN])</strong> : If you use the named attribute syntax in ColdFusion, each argument name will be used as the name of the property, and the value of the argument will be used as the associated item.</li>
+				<li><strong>set (ArgumentCollection = </strong><em>Struct</em><strong> collection)</strong> : If you use the ArgumentCollection syntax in ColdFusion, the name of each member of the passed structure will be used as the name of the property, and the value of each member of the structure will be used as the associated item. </li>
+			</ol>
+			<p>Examples:</p>
+			<blockquote>
+				<p>Each of the following examples will produce the same object structure:</p>
+				<p>&lt;cfset object.<a href="PiComponent.html#set">set</a>(&quot;id&quot;, &quot;page1&quot;) /&gt;<br />
+					&lt;cfset object.<a href="PiComponent.html#set">set</a>(&quot;title&quot;, &quot;Page One&quot;) /&gt;<br />
+					&lt;cfset object.<a href="PiComponent.html#set">set</a>(&quot;template&quot;, &quot;first.cfm&quot;) /&gt;</p>
+				<p>&lt;cfset object.<a href="PiComponent.html#set">set</a>(id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot;) /&gt;</p>
+				<p>&lt;cfset args[&quot;id&quot;] = &quot;page1&quot; /&gt;<br />
+					&lt;cfset args[&quot;title&quot;] = &quot;Page One&quot; /&gt;<br />
+					&lt;cfset args[&quot;template&quot;] = &quot;first.cfm&quot; /&gt;<br />
+					&lt;cfset object.<a href="PiComponent.html#set">set</a>(ArgumentCollection=args) /&gt; </p>
+				<p><em>Caller Page Code</em>: &lt;my:customTag id=&quot;page1&quot;, title=&quot;Page One&quot;, template=&quot;first.cfm&quot; /&gt;<br />
+					<em>Custom Tag Code</em>: &lt;cfset object.<a href="PiComponent.html#set">set</a>(ArgumentCollection=Attributes) /&gt; </p>
+			</blockquote>
+		</blockquote>
+	</li>
+</ul>
+<p>&nbsp;</p>
+				<p>&nbsp;</p>
+			
+		</td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+	  <td width="220" valign="top" bgcolor="#DDDDDD"><p style="text-align:center"><a href="http://www.twitter.com/millionmunkeys"><img src="http://twitter-badges.s3.amazonaws.com/follow_us-b.png" alt="Follow millionmunkeys on Twitter"/></a>
+	      <p></td>
+  </tr>
+	<tr>
+		<td colspan="2" align="center" valign="top" bgcolor="#DDDDDD"><p>Copyright &copy;2010, MillionMunkeys&reg; LLC, All Rights Reserved</p></td>
+	</tr>
+</table>
+</body>
+</html>
+	

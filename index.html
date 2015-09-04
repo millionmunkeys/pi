@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>
+		
+			What is Pi Programming?
+		
+		- PiMunkey Documentation - MillionMunkeys.net
+	</title>
+	<link href="MillionMunkeys.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+	<!--
+	.NewWindow {
+		font-size: smaller;
+	}
+	-->
+	</style>
+
+</head>
+
+<body link="#AE854C" vlink="#908B76" alink="#002377">
+<table width="90%" align="center" cellpadding="10" cellspacing="1" class="MainLayout">
+	<tr bgcolor="#FFFFFF">
+		<td colspan="2" align="center" valign="top" bgcolor="#002377"><a href="http://www.millionmunkeys.net/"><img src="MillionMunkeysLogoMunkey.jpg" alt="MillionMunkeys.net" width="650" height="125" border="0" longdesc="MillionMunkeys Logo"></a></td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+		<td width="220" align="left" valign="top" bgcolor="#FFFFFF">
+			<table width="200" border="0" cellpadding="0" cellspacing="0" id="navigation">
+	
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="index.html">What is Pi Programming?</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="whatsnew.html">What's New</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong><a href="structures.html">Arrays vs. Structs</a></strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+							<tr><td colspan="2">&nbsp;</td></tr>
+						
+						
+							<tr>
+								
+								<td colspan="2">
+									
+										
+											<strong>Pi Object Reference</strong>
+										
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="getters.html">Getter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="setters.html">Setter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+					
+						
+						
+							<tr>
+								
+									<td width="10">&nbsp;</td>
+								
+								<td colspan="1">
+									
+										<a href="functions.html">Listener & Filter Functions</a>
+									
+								</td>
+							</tr>
+						
+					
+				
+			</table>
+			<p>&nbsp;</p>
+		</td>
+		<td width="*" rowspan="2" valign="top" bgcolor="#FFFFFF">
+			
+				<p>
+					
+					
+						
+						<a href="index.html">PiMunkey Documentation</a> ->
+					
+				</p>
+				
+					<h2>What is Pi Programming?</h2>
+				
+				<h4>Property-Invocation (Pi) Programming</h4>
+<p>Pi Programming is a style of programming. It shares in philosophy with <a href="http://en.wikipedia.org/wiki/JavaBean" target="_blank">JavaBeans</a> to say that every property can only be modifed using &quot;getter&quot; and &quot;setter&quot; functions. It is also  a close cousin to <a href="http://en.wikipedia.org/wiki/Implicit_invocation" target="_blank">Implicit-Invocation</a> Programming which allows any object to listen for a broadcast message, and lie dormant until someone broadcasts that message.</p>
+<h4>Get &amp; Set</h4>
+<p>Pi Programming differs from <a href="http://en.wikipedia.org/wiki/JavaBean" target="_blank">JavaBeans</a> in that you don't write your own getter and setter functions. Instead you use a standard set of functions on all objects. </p>
+<ul>
+	<li><a href="getters.html#exists">exists</a>: Tells you whether a property exists on an object.</li>
+	<li><a href="getters.html#get">get</a>: Returns the stored value for that property.</li>
+	<li><a href="setters.html#set">set</a>: Assigns a stored value to a property name.</li>
+	<li><a href="setters.html#remove">remove</a>: Removes a property from an object.</li>
+</ul>
+<h4>Property Invocation vs. Events</h4>
+<p>Property Invocation differs from <a href="http://en.wikipedia.org/wiki/Implicit_invocation" target="_blank">Implicit Invocation</a> in that you don't have to register any arbitrary events. Instead, every &quot;get&quot; and &quot;set&quot; event becomes a potential plugin point for infinite extendability. And to make it happen you only need to create one of two types of functions.</p>
+<ul>
+	<li><a href="functions.html#listeners">listener</a>: This type of function is fired on a &quot;set&quot; operation, allowing the function to react to and/or modify the variable after it has been added to the object.</li>
+	<li><a href="functions.html#filters">filter</a>: This type of function is fired on a &quot;get&quot; operation, allowing the function to react to and/or modify the variable before it is returned to the requesting function.</li>
+</ul>
+<h4>Struct vs. Array Notation</h4>
+<p>Collections of data in ColdFusion are commonly stored in either structures or arrays. With Pi Programming, both are handled by the same object. This standardizes object interactions, and makes everything extensible.</p>
+<ul>
+	<li><strong>struct notation:</strong> Named properties are added by their IDs, and can be accessed in the same way. They can  be added one at a time or in batches.
+		<blockquote>
+			<p>&lt;cfset page = CreateObject(&quot;component&quot;,&quot;MillionMunkeys.PiMunkey.PiComponent&quot;) /&gt;<br />
+				&lt;cfset page.<strong>set</strong>(&quot;id&quot;,&quot;page1&quot;) /&gt;<br />
+				&lt;cfset page.<strong>set</strong>(title=&quot;First Page&quot;, template=&quot;firstpage.cfm&quot;, 
+				group=&quot;products&quot;) /&gt;<br />
+				&lt;cfset page.<strong>remove</strong>(&quot;group&quot;) /&gt;<br />
+				&lt;cfreturn page.<strong>get</strong>(&quot;title&quot;) /&gt; </p>
+		</blockquote>
+	</li>
+	<li><strong>array notation: </strong>Ordered arrays are not accessed by named attributes, but by their index within the object. You can use the &quot;add&quot;, &quot;insertAt&quot;, and &quot;remove&quot; functions to add and remove properties based on their location in the object, rather than their name.
+		<blockquote>
+			<p>&lt;cfset site = CreateObject(&quot;component&quot;,&quot;MillionMunkeys.PiMunkey.PiComponent&quot;) /&gt;<br />
+				&lt;cfset page1 = CreateObject(&quot;component&quot;,&quot;MillionMunkeys.PiMunkey.PiComponent&quot;) /&gt;<br />
+				&lt;cfset page2	= CreateObject(&quot;component&quot;,&quot;MillionMunkeys.PiMunkey.PiComponent&quot;) /&gt;<br />
+				&lt;cfset index = site.<strong>add</strong>(page2) /&gt; <br />
+				&lt;cfset site.<strong>insertAt</strong>(index,page1) /&gt;<br />
+				&lt;cfset site.<strong>remove</strong>(2) /&gt; </p>
+		</blockquote>
+	</li>
+</ul>
+<blockquote>&nbsp;
+</blockquote>
+
+				<p>&nbsp;</p>
+			
+		</td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+	  <td width="220" valign="top" bgcolor="#DDDDDD"><p style="text-align:center"><a href="http://www.twitter.com/millionmunkeys"><img src="http://twitter-badges.s3.amazonaws.com/follow_us-b.png" alt="Follow millionmunkeys on Twitter"/></a>
+	      <p></td>
+  </tr>
+	<tr>
+		<td colspan="2" align="center" valign="top" bgcolor="#DDDDDD"><p>Copyright &copy;2010, MillionMunkeys&reg; LLC, All Rights Reserved</p></td>
+	</tr>
+</table>
+</body>
+</html>
+	

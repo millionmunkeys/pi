@@ -1,2 +1,3 @@
-# pi
-Property-Invocation Programming base code
+# Property-Invocation (Pi) Programming base code
+
+Documentation: http://millionmunkeys.github.io/pi/

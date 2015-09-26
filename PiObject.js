@@ -7,9 +7,9 @@ PiObject = function(o){
 	this._values = {};
 	this._length = this._properties.length;
 	this._listeners = {};
+	this._listeners[""] = []; // Init global listeners
 	this._filters = {};
-	this._globalListeners = [];
-	this._globalFilters = [];
+	this._filters[""] = []; // Init global filters
 	this._uuid = null;
 	this._uid = -1; // This is for generating unique property names.
 	
@@ -19,7 +19,7 @@ PiObject = function(o){
 	this.init(o);
 };
 PiObject.prototype.getUUID = function() {
-	if (this._uuid == null) {
+	if (this._uuid === null) {
 		var my = {};
 		my.date = new Date();
 		my.uuid = [];
@@ -54,12 +54,12 @@ PiObject.prototype.getIndex = function(propertyName) {
 	// Lookup by property name
 	if (propertyName.constructor != Number) {
 		for (var i=0; i < this.getLength(); i++)
-			if (this._properties[i] == propertyName)
+			if (this._properties[i] === propertyName)
 				return i;
 	}
 	// If not a property name, try treating it as a number.
 	var num = parseInt(propertyName);
-	if (propertyName == num) {
+	if (propertyName === num) {
     	if (Math.abs(num) >=0 && Math.abs(num) < this.getLength())
     		return num;
 	}
@@ -102,9 +102,8 @@ PiObject.prototype.get = function(property) {
 		my.result = "";
 	// Apply filters
 	my.filters = this._filters[property] || [];
-	my.filters = my.filters.concat(this._globalFilters);
 	for (var i=0; i < my.filters.length; i++) {
-		my.returnVariable = my.filters[i].method.call(my.filters[i].scope,this,property,my.result);
+		my.returnVariable = my.filters[i](this,property,my.result);
 		if (my.returnVariable != undefined)
 			my.result = my.returnVariable;
 	}
@@ -128,8 +127,8 @@ PiObject.prototype.exists = function(property) {
 PiObject.prototype.set = function(propertyName,value) {
 	var o = {};
 	// Convert arguments into an object
-	if (propertyName != undefined) {
-		if (propertyName.constructor == Object)
+	if (typeof(propertyName) !== "undefined") {
+		if (propertyName.constructor === Object)
 			o = propertyName;
 		else
 			o[propertyName] = value;
@@ -139,12 +138,12 @@ PiObject.prototype.set = function(propertyName,value) {
 	for (my.name in o) {
 		my.index = my.name;
 		// Named Property
-		if (my.name.constructor == Number) // Numeric
+		if (my.name.constructor === Number) // Numeric
 			my.name = this.getProperty(my.name);
 		// Old Value
 		my.oldValue = this._values[my.name] || "";
 		// Add New Property?
-		if (this.getIndex(my.index) < 0) {
+		if (typeof(this.getIndex(my.index)) === "undefined") {
 			this._uid++;
 			this._properties.push(my.name);
 			this._length = this._properties.length;
@@ -154,9 +153,8 @@ PiObject.prototype.set = function(propertyName,value) {
 		this._values[my.name] = my.newValue;
 		// Listeners
 		my.listeners = this._listeners[my.name] || [];
-		my.listeners = my.listeners.concat(this._globalListeners);
 		for (var i=0; i < my.listeners.length; i++) {
-			my.result = my.listeners[i].method.call(my.listeners[i].scope,this,my.index,my.oldValue,my.newValue);
+			my.result = my.listeners[i](this,my.index,my.oldValue,my.newValue);
 			if (my.result != undefined && my.result != my.newValue) { // If no change, don't do a set, so we dont mess up deletes.
 				my.newValue = my.result;
 				this._values[my.name] = my.newValue;
@@ -255,7 +253,7 @@ PiObject.prototype.remove = function() {
 		// get numeric index
 		my.index = this.getIndex(my.prop);
 		// check if delete has been overridden by a listener
-		if (this._values[my.prop].length == 0) {
+		if (this._values[my.prop].length === 0) {
 			delete this._values[my.prop]; // remove value
 			this._properties.splice(my.index,1); // remove property
 			this._length = this._properties.length;
@@ -284,7 +282,7 @@ PiObject.prototype.deleteAll = this.removeAll; // alias
 /* FUNCTIONS */
 
 // The core function for adding filters and listeners.
-PiObject.prototype.addFunction = function(type,action,property,scope,method,applyToExisting) {
+PiObject.prototype.addFunction = function(type,action,properties,method,applyToExisting) {
 	var my = {};
 	
 	/* Error-Check Parameters */
@@ -293,75 +291,60 @@ PiObject.prototype.addFunction = function(type,action,property,scope,method,appl
 	// Multiple named properties can be supplied through a list of names, e.g. "prop1,prop3,prop5", or an array of names, e.g. ["prop1","prop3","prop4"].
 	// Multiple indexes must be supplied through an array of indexes, e.g. [1,3,5], or else they will be assumed to be names, e.g. "1,3,5" == ["1","3","5"].
 	// You can mix named and numbered properties through using an array, e.g. ["prop1",3,"prop5"].
-	if (typeof(property) == "string")
-		property = property.split(",");
+	if (typeof(properties) === "string")
+		properties = properties.split(",");
 	
-	// If property not supplied, shift arguments to the right.
-	if (property == undefined || property.constructor != Array) {
+	// If properties not supplied, shift arguments to the right.
+	if (typeof(properties) === "undefined" || properties.constructor !== Array) {
 		applyToExisting = method;
-		method = scope;
-		scope = property;
-		property = [""];
-	}
-	// If direct reference to a function, shift arguments to the right.
-	if (typeof(scope) == "function") {
-		applyToExisting = method;
-		method = scope;
-		// WARNING: We set the scope to 'this' by default, because otherwise javascript sets the scope to 'window' whenever a function is
-		// defined at the prototype level, regardless of whether you use addListener(Class.prototype.method) or addListener(this.method).
-		scope = this;
-	}
-	else if (typeof(method) == "string") {
-		method = scope[method];
+		method = properties;
+		properties = [""];
 	}
 	// Set default applyToExisting parameter
-	if (applyToExisting == undefined || typeof(applyToExisting) != "boolean")
+	if (typeof(applyToExisting) === "undefined" || typeof(applyToExisting) !== "boolean")
 		applyToExisting = true;
 	// Error Checking
-	if (typeof(scope) != "object")
-		throw("The scope parameter supplied to the " + action + type + "() function was not of type 'object'.");
-	if (typeof(method) != "function")
+	if (typeof(method) !== "function")
 		throw("The method parameter supplied to the " + action + type + "() function was not of type 'function'.");
-	if (property.constructor != Array)
+	if (properties.constructor !== Array)
 		throw("The property parameter supplied to the " + action + type + "() function must be either of type 'string' or 'array'.");
-	if (typeof(applyToExisting) != "boolean")
+	if (typeof(applyToExisting) !== "boolean")
 		throw("The applyToExisting parameter supplied to the " + action + type + "() function was not of type 'boolean'.");
 	
 	// NOTE: The following will still only be executed once for global listeners/filters
-	for (my.index=0; my.index<property.length; my.index++) {
+	for (my.index=0; my.index<properties.length; my.index++) {
 		
 		// Get named property, if index provided
-		my.property = this.getProperty(property[my.index]);
+		my.property = this.getProperty(properties[my.index]);
 		
 		/* Add function */
+		my.functions = (type === "Listener") ? this._listeners : this._filters;
+		// Start each array with the existing global listeners.
+		if (action === "add" && !my.functions[my.property])
+			my.functions[my.property] = [].concat(my.functions[""]);
 		
-		if (my.property.length) { // Property
-			if (type == "Listener") {
-				if (action == "add")
-					this._listeners[my.property] = this._listeners[my.property] || [];
-				my.functions = this._listeners[my.property];
-			} else {
-				if (action == "add")
-					this._filters[my.property] = this._filters[my.property] || [];
-				my.functions = this._filters[my.property];
-			}
-		} else { // Global
-			if (type == "Listener")
-				my.functions = this._globalListeners;
-			else
-				my.functions = this._globalFilters;
+		if (my.property.length) {
+			my.properties = [my.property];
+		} else {
+			my.properties = [];
+			for (var p in my.functions)
+				my.properties.push(p);
 		}
-		if (my.functions != undefined) { // only undefined if remove action
+		
+		if (typeof(my.functions[my.property]) !== "undefined") { // only undefined if remove action
 			my.alreadyExists = false;
-			for (var i=my.functions.length-1; i >= 0; i--) {
-				if (my.functions[i].method == method && my.functions[i].scope === scope) { // Do an exact match on scope
-					if (action == "add")
-						my.alreadyExists = true;
-					else if (action == "remove")
-						my.functions.splice(i,1); // do remove
-					break;
+			for (var p=0; p<my.properties.length; p++) {
+				for (var i=my.functions[my.properties[p]].length-1; i >= 0; i--) {
+					if (my.functions[my.properties[p]][i] === method) { // Do an exact match
+						if (action === "add")
+							my.alreadyExists = true;
+						else if (action === "remove")
+							my.functions[my.properties[p]].splice(i,1); // do remove
+						break;
+					}
 				}
 			}
+			
 			/* 
 			 NOTE: I had considered applying to existing, even if it already exists, 
 			 but only if the stored applyToExisting was false.  But we don't know 
@@ -370,22 +353,19 @@ PiObject.prototype.addFunction = function(type,action,property,scope,method,appl
 			 when the function is fired, but what if it's global, then we have to track
 			 What parameters it's been fired for.  Too difficult.  Keeping it simple. 
 			*/ 
-			if (action == "add" && !my.alreadyExists) {
-				my.functions.push({
-					'property':my.property,
-					'scope':scope,
-					'method':method,
-					'applyToExisting':applyToExisting
-				});
-				if (type == "Listener" && applyToExisting) {
-					if (my.property.length)
-						my.properties = [my.property];
-					else
+			if (action === "add" && !my.alreadyExists) {
+				// NEW: all property function queues get an instantiation-ordered list of functions that include global functions.
+				for (var i=0; i<my.properties.length; i++) {
+					my.functions[my.properties[i]].push(method);
+				}
+				if (type === "Listener" && applyToExisting) {
+					// This loop is all properties, not just function properties.
+					if (!my.property.length)
 						my.properties = this._properties;
-					for (var i=0; i < my.properties.length; i++) {
-						if (this._values[my.properties[i]] != undefined) {
-							my.result = method.call(scope,this,my.properties[i],"",this._values[my.properties[i]]);
-							if (my.result != undefined)
+					for (var i=0; i<my.properties.length; i++) {
+						if (typeof(this._values[my.properties[i]]) !== "undefined") {
+							my.result = method(this, my.properties[i], "", this._values[my.properties[i]]);
+							if (typeof(my.result) !== "undefined")
 								this._values[my.properties[i]] = my.result;
 						}
 					}
@@ -399,50 +379,39 @@ PiObject.prototype.addFunction = function(type,action,property,scope,method,appl
 
 // Adds a listener function to either the entire object as a whole, or a specific property within the object.  
 // NOTE: You may add a listener to property even if the property doesn't exist yet.  It will be fired when the property is added to the object.
-PiObject.prototype.addListener = function(property,scope,method,applyToExisting) {
-	return this.addFunction.call(this,"Listener","add",property,scope,method,applyToExisting);
+PiObject.prototype.addListener = function(property,method,applyToExisting) {
+	return this.addFunction.call(this,"Listener","add",property,method,applyToExisting);
 };
 // Removes a listener function from either the entire object, or from a specific property within the object.
-PiObject.prototype.removeListener = function(property,scope,method) {
-	return this.addFunction.call(this,"Listener","remove",property,scope,method);
+PiObject.prototype.removeListener = function(property,method) {
+	return this.addFunction.call(this,"Listener","remove",property,method);
 };
 
 // Adds a filter function to either the entire object as a whole, or a specific property within the object.
-PiObject.prototype.addFilter = function(property,scope,method) {
-	return this.addFunction.call(this,"Filter","add",property,scope,method);
+PiObject.prototype.addFilter = function(property,method) {
+	return this.addFunction.call(this,"Filter","add",property,method);
 };
 // Removes a filter function from either the entire object, or from a specific property within the object.
-PiObject.prototype.removeFilter = function(property,scope,method) {
-	return this.addFunction.call(this,"Filter","remove",property,scope,method);
+PiObject.prototype.removeFilter = function(property,method) {
+	return this.addFunction.call(this,"Filter","remove",property,method);
 };
 
 // Iterates over all values in the object and executes the passed-in function.
 // This function was implemented such that execution is not broken, even if the function deletes items in the PiObject.
 // If no value is returned by the method, then execution continues, but if any value is returned, the loop is broken and the value is returned to the caller.
-PiObject.prototype.each = function(scope,method) {
-	// If direct reference to a function, shift arguments to the right.
-	if (typeof(scope) == "function") {
-		method = scope;
-		scope = this;
-	}
-	else if (typeof(method) == "string") {
-		method = scope[method];
-	}
-	// Error Checking
-	if (typeof(scope) != "object")
-		throw("The scope parameter supplied to the each() function was not of type 'object'.");
-	if (typeof(method) != "function")
+PiObject.prototype.each = function(method) {
+	if (typeof(method) !== "function")
 		throw("The method parameter supplied to the each() function was not of type 'function'.");
 	// Use propertyList, so that if the function deletes items within the object, we don't care about shifting.
 	var propertyList = this.getPropertyList().split(',');
 	// Iterate over properties
 	for (var i=0; i<propertyList.length; i++) {
 		// Make sure that the property hasn't been deleted by a previous iteration.
-		if (typeof(this._values[propertyList[i]]) != "undefined") {
+		if (typeof(this._values[propertyList[i]]) !== "undefined") {
 			// CAUTION: The temptation here is to pass index as the second argument, instead of property.
 			// However, if you do this, deleting items in the collection will break execution!
 			// That's why we use property instead, plus for consistency so it exactly matches Filter functions.
-			var result = method.call(scope,this,propertyList[i],this._values[propertyList[i]]);
+			var result = method(this,propertyList[i],this._values[propertyList[i]]);
 			if (result != undefined) {
 				return result; // returning a value breaks the loop.
 			}
@@ -455,7 +424,7 @@ PiObject.prototype.destroy = function() {
 	delete this._properties;
 	for (var prop in this._values)
 		delete this._values[prop];
-	// delete values; // You cannot delete local variables!
+	delete this._values;
 	delete this._length;
 	for (var prop in this._listeners)
 		for (var i in this._listeners[prop])
@@ -465,27 +434,11 @@ PiObject.prototype.destroy = function() {
 		for (var i in this._filters[prop])
 			delete this._filters[prop][i];
 	delete this._filters;
-	for (var i in this._globalListeners)
-		delete this._globalListeners[i];
-	delete this._globalListeners;
-	for (var i in this._globalFilters)
-		delete this._globalFilters[i];
-	delete this._globalFilters;
-	// delete this._uuid; // You cannot delete local variables!
-	// delete this._uid; // You cannot delete local variables!
+	delete this._uuid;
+	delete this._uid;
 };
 
-/* DEBUG OUTPUT FUNCTIONS - These really shouldn't be used in regular code. */
-
-PiObject.prototype.getValues = function(){
-	// copy top-level items by value, and lower-level items by reference.
-	var copy = {};
-	for (var prop in this._values)
-		copy[prop] = this._values[prop];
-	return copy;
-};
-
-// Public Functions (w/o access to private variables)
+// Static Functions
 PiObject.prototype.init = function(o) {
 	if (o instanceof Array)
 		this.add.apply(this,o);
@@ -493,7 +446,6 @@ PiObject.prototype.init = function(o) {
 		this.set.apply(this,arguments);
 };
 
-// Static Functions (w/o access to private variables)
 PiObject.extend=function(constructor) {
 	var parent = this;
 	constructor = constructor || function(){
@@ -505,4 +457,14 @@ PiObject.extend=function(constructor) {
 	constructor.prototype = new parent();
 	constructor.prototype.constructor = constructor;
 	return constructor;
+};
+
+/* DEBUG OUTPUT FUNCTIONS - These really shouldn't be used in regular code. */
+
+PiObject.prototype.getValues = function(){
+	// copy top-level items by value, and lower-level items by reference.
+	var copy = {};
+	for (var prop in this._values)
+		copy[prop] = this._values[prop];
+	return copy;
 };

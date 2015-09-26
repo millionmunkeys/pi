@@ -153,34 +153,34 @@ m2.output = function(object,property,oldValue,newValue) {
 	document.write("Changing the " + property + " property on " + object.get('title') + " from '" + oldValue + "' to '" + newValue + "'<br />");
 }
 document.write("<em>Adding a listener, but not applying to existing, so no output.</em><br />");
-m1.addListener(m2,"output",false);
+m1.addListener(m2.output,false);
 document.write("<em>Adding the same listener, with applying to existing, but still no output because it already exists.</em><br />");
-m1.addListener(m2,"output",true); // This will not produce any output, since the function already exists.
+m1.addListener(m2.output,true); // This will not produce any output, since the function already exists.
 document.write("<em>Updating the object now, so the global listener will fire for the new property.</em><br />");
 m1.set('id','Test'); // This should produce output.
 m2.outputURL = function(object,property,oldValue,newValue) {
 	document.write("The new value of the '" + property + "' is '" + newValue + "'<br />");
 }
 document.write("<em>The output of the url property should be shown on the next line, since applyToExisting was used.</em><br />");
-m1.addListener("url",m2,"outputURL",true);
+m1.addListener("url",m2.outputURL,true);
 document.write("<em>Now after I update the url, the new url should be shown again on the next line, followed by the generic update output.</em><br />");
 m1.set("url","PiObjectTestCases2.html");
-document.write("<em>The following test case uses a normal function on the window object, not a PiObject.</em><br />");
-document.write("<em>The following test case prevents editing.  Even though the URL is updated, the new function will reset it back to the original value, but not until after the first listener has been applied.  It will also update the unrelated property 'title' to 'PiObject #1 - Modified'.</em><br />");
+document.write("<em>The following test case uses a normal function on the window object, not a PiObject.</em> ");
+document.write("<em>It prevents editing.  Even though the URL is updated, the new function will reset it back to the original value, but not until after the first listener has been applied.  It will also update the unrelated property 'title' to 'PiObject #1 - Modified'.</em><br />");
 resetURL = function(object,property,oldValue,newValue) {
 	document.write("Resetting the value of the '" + property + "' property back to '" + oldValue + "'.<br />");
 	object.set('title', object.get('title') + " - Modified");
 	return oldValue;
 }
-m1.addListener("url",window,"resetURL",false);
+m1.addListener("url",resetURL,false);
 m1.set("url","PiObjectTestCases3.html");
 document.write("<em>Now that the reset function has been fired, the current value of the 'url' property is '" + m1.get('url') + "'.</em><br />");
 document.write("<em>And the current value of the 'title' property is '" + m1.get('title') + "'.</em><br />");
 document.write("<em>We will now remove the reset listener.</em><br />");
-m1.removeListener("url",window,"resetURL",false);
+m1.removeListener("url",resetURL,false);
 m1.set("url","PiObjectTestCases3.html");
 document.write("<em>Now we will remove the global listener that outputs the update statements, and update the title.  There should be no output.</em><br />");
-m1.removeListener(m2,"output");
+m1.removeListener(m2.output);
 m1.set("title", m1.get("title") + " - Modified");
 </script>
 
@@ -198,10 +198,10 @@ document.write("<em>The following test case will always append the word 'Munkeys
 function withMunkeys(object,property,value) {
 	return value + " w/ Munkeys";
 }
-m1.addFilter('title',window,'withMunkeys');
+m1.addFilter('title',withMunkeys);
 document.write("title = '" + m1.get('title') + "'<br />");
 document.write("<em>Now we will remove the filter, and the title with go back to the way it was.</em><br />");
-m1.removeFilter('title',window,'withMunkeys');
+m1.removeFilter('title',withMunkeys);
 document.write("title = '" + m1.get('title') + "'<br />");
 </script>
 

@@ -90,23 +90,53 @@ PiObject.prototype.getPropertyList = function(propertyName) {
 };
 
 // Returns the value of a property, or the empty string if not found.
-PiObject.prototype.get = function(property) {
+PiObject.prototype.get = function(property, defaultValue) {
 	var my = {};
-	// Get property name from index, if numeric
-	property = this.getProperty(property);
+	
+	if (typeof(property) === "string") {
+		my.path = property.match(/[^\.\[\]]+/g);
+		// Get property name from index, if numeric
+		my.property = this.getProperty(my.path.shift());
+	} else {
+		my.path = [];
+		my.property = this.getProperty(property);
+	}
 	// Get value from 'values' collection
 	// CAUTION: You have to use typeof here, so that values of zero are not ignored.
-	if (typeof this._values[property] != "undefined")
-		my.result = this._values[property];
-	else
-		my.result = "";
+	if (typeof this._values[my.property] !== "undefined")
+		my.result = this._values[my.property];
+	for (var p=0; p<my.path.length; p++) {
+		if (typeof(my.result) !== "object")
+			break;
+		if (my.result instanceof PiObject) {
+			my.index = my.result.getIndex(my.path[p]);
+			my.result = my.result.get(my.index);
+		}
+		else if (my.result.constructor === Array) {
+			my.index = parseInt(my.path[p]);
+			if (my.path[p] == my.index) // CAUTION: type-insensitive comparison
+				my.result = my.result[my.index];
+			else
+				delete my.result;
+		}
+		else if (typeof(my.result) === "object") {
+			my.index = my.path[p];
+			my.result = my.result[my.index];
+		}
+		else {
+			break;
+		}
+	}
 	// Apply filters
 	my.filters = this._filters[property] || [];
 	for (var i=0; i < my.filters.length; i++) {
 		my.returnVariable = my.filters[i](this,property,my.result);
-		if (my.returnVariable != undefined)
+		if (typeof(my.returnVariable) !== "undefined")
 			my.result = my.returnVariable;
 	}
+	// Apply default
+	if (typeof(my.result) === "undefined")
+		my.result = (typeof(defaultValue) !== "undefined") ? defaultValue : "";
 	// Return result
 	return my.result;
 };
@@ -136,34 +166,55 @@ PiObject.prototype.set = function(propertyName,value) {
 	// Process collection of name/value pairs.
 	var my = {};
 	for (my.name in o) {
-		my.index = my.name;
-		// Named Property
-		if (my.name.constructor === Number) // Numeric
-			my.name = this.getProperty(my.name);
-		// Old Value
-		my.oldValue = this._values[my.name] || "";
-		// Add New Property?
-		if (typeof(this.getIndex(my.index)) === "undefined") {
-			this._uid++;
-			this._properties.push(my.name);
-			this._length = this._properties.length;
-		}
-		// New Value
-		my.newValue = o[my.name];
-		this._values[my.name] = my.newValue;
-		// Listeners
-		my.listeners = this._listeners[my.name] || [];
-		for (var i=0; i < my.listeners.length; i++) {
-			my.result = my.listeners[i](this,my.index,my.oldValue,my.newValue);
-			if (my.result != undefined && my.result != my.newValue) { // If no change, don't do a set, so we dont mess up deletes.
-				my.newValue = my.result;
-				this._values[my.name] = my.newValue;
+		my.path = my.name.match(/[^\.\[\]]+/g);
+		my.last = my.path.pop();
+		if (my.path.length) {
+			my.end = my.name.length - my.last.length;
+			if (my.name.charAt(my.name.length-1) == ']')
+				my.end -=  2;
+			else
+				my.end -= 1;
+			my.path = my.name.substring(0, my.end);
+			my.child = this.get(my.path);
+			if (my.child) {
+				if (my.child instanceof PiObject)
+					my.child.set(my.last, o[my.name]);
+				else if (my.child.constructor === Array)
+					my.child[parseInt(my.last)] = o[my.name];
+				else if (typeof(my.child) === "object")
+					my.child[my.last] = o[my.name];
+			}
+		} else {
+			my.name = my.last;
+			my.index = my.name;
+			// Named Property
+			if (my.name.constructor === Number) // Numeric
+				my.name = this.getProperty(my.name);
+			// Old Value
+			my.oldValue = this._values[my.name] || "";
+			// Add New Property?
+			if (typeof(this.getIndex(my.index)) === "undefined") {
+				this._uid++;
+				this._properties.push(my.name);
+				this._length = this._properties.length;
+			}
+			// New Value
+			my.newValue = o[my.name];
+			this._values[my.name] = my.newValue;
+			// Listeners
+			my.listeners = this._listeners[my.name] || [];
+			for (var i=0; i < my.listeners.length; i++) {
+				my.result = my.listeners[i](this,my.index,my.oldValue,my.newValue);
+				if (my.result != undefined && my.result != my.newValue) { // If no change, don't do a set, so we dont mess up deletes.
+					my.newValue = my.result;
+					this._values[my.name] = my.newValue;
+				}
 			}
 		}
 	}
 	// If it's only a single set, return it as a convenience, to avoid "object.set(property,value); value = object.get(object.length);"  This replaces that with "value = object.set(property,value);"  We will only do this for the set operation with two arguments.  We will not do this when you pass a collection of properties (even if there is only one).
 	if (propertyName != undefined && propertyName.constructor != Object)
-		return this.get(my.name); // Allow chaining
+		return this.get(propertyName); // Allow chaining
 	else
 		return this; // Allow chaining
 };

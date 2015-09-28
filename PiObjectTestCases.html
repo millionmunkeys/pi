@@ -140,6 +140,47 @@ document.write("get(1) = '" + m.get(1) + "'<br />");
 document.write("get(3) = '" + m.get(3) + "'<br />");
 </script>
 
+<h4>set() and get() with sub-objects</h4>
+<p>
+	Object = {<br />
+	&nbsp; 'arr': [],<br />
+	&nbsp; 'obj': {}<br />
+	&nbsp; 'pi': new PiObject()<br />
+	}<br />
+</p>
+<script type="text/javascript">
+m = new PiObject({
+	pi: new PiObject(),
+	obj: {},
+	arr: []
+});
+document.write('set("pi.id", 37)<br />');
+document.write('set("obj.id", 38)<br />');
+document.write('set("arr[0]", 39)<br />');
+m.set("pi.id", 37);
+m.set("obj.id", 38);
+m.set("arr[0]", 39);
+document.write('get("pi.id") = ' + m.get("pi.id") + '<br />');
+document.write('get("obj.id") = ' + m.get("obj.id") + '<br />');
+document.write('get("arr[0]") = ' + m.get("arr[0]") + '<br />');
+document.write('set("pi.pi", new PiObject())<br />');
+document.write('set("pi.pi.id", 40)<br />');
+document.write('set("obj[pi]", new PiObject())<br />');
+document.write('set("obj[pi][id]", 40)<br />');
+document.write('set("arr[1]", {})<br />');
+document.write('set("arr[1][id]", 42)<br />');
+m.set("pi.pi", new PiObject());
+m.set("pi.pi.id", 40);
+m.set("obj[pi]", new PiObject());
+m.set("obj[pi][id]", 41);
+m.set("arr[1]", {});
+m.set("arr[1][id]", 42);
+document.write('get("pi.pi.id") = ' + m.get("pi.pi.id") + '<br />');
+document.write('get("obj.pi.id") = ' + m.get("obj.pi.id") + '<br />');
+document.write('get("obj[pi][id]") = ' + m.get("obj[pi][id]") + '<br />');
+document.write('get("arr[1][id]") = ' + m.get("arr[1][id]") + '<br />');
+</script>
+
 <h4>set() Test with Listeners</h4>
 <p>
 </p>
